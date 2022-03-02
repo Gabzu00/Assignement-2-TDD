@@ -4,18 +4,14 @@
 """Unit testing."""
 
 import unittest
-from PIG import Game
+from PIG import Main
 
 
-class TestGameClass(unittest.TestCase):
+class TestMainClass(unittest.TestCase):
     """Test the class."""
 
-    """"def test_init_default_object(self):
-        res = Game()
-        self.assertIsInstance(res)""" ""
-
     def test_HelloWorld(self):
-        res = Game.HelloWorld()
+        res = Main.HelloWorld()
         self.assertEqual(res, "Hello World")
 
 
