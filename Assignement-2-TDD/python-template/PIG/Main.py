@@ -1,6 +1,6 @@
 """Detta motsvarar vår main -> vår meny"""
 
-import DiceHand
+import Game
 
 def main():
     print("Instructions: ")
@@ -9,14 +9,11 @@ def main():
     print("3. If the player rolls any other number, it is added to their turn total and the player's turn continues.")
     print("4. If a player chooses to hold, their turn total is added to their score, and it becomes the next player's turn.")
     print("5. The first player to score 100 or more points wins.")
-    print("")
-    print("-------------------------------------------------------------------------------------------------------------")
-    print("")
     print("6. Type cheat if you want to win faster")
-    
-    start = DiceHand.Start
-    start.Throw()
+    print("")
 
+    start = Game.Start
+    start.startPlayer()
 
 
 if __name__ == "__main__":
