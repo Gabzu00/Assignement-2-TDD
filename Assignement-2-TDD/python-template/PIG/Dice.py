@@ -1,25 +1,29 @@
 import random
 
-def throwDice():
-    """Generera siffra mellan 1 och 6"""
-    return random.randint(1,6)
 
-"""Visa vilken symbol som man får"""
+class dice:
+    
+    def throwDice():
+        """Generera siffra mellan 1 och 6"""
+        return random.randint(1,6)
 
-def diceOne():
-    return" ______\n|      |\n|   •  |\n|______|\nYou got a one!"
-        
-def diceTwo():
-    return" ______\n|      |\n|  ••  |\n|______|\nYou got a two!"
+    """Visa vilken symbol som man får"""
 
-def diceThree():
-    return" ______\n|      |\n|  ••• |\n|______|\nYou got a three!"
+    def diceOne():
+        return"⚀ --> You got a one!"
+            
+    def diceTwo():
+        return"⚁ --> You got a two!"
 
-def diceFour():
-    return" ______\n|      |\n| •••• |\n|______|\nYou got a four!"
+    def diceThree():
+        return"⚂ --> You got a three!"
 
-def diceFive():
-    return" _______\n|       |\n| •   • |\n|   •   |\n| •   • |\n|_______|\nYou got a five!"
+    def diceFour():
+        return"⚃ --> You got a four!"
 
-def diceSix():
-    return" _______\n|       |\n| •   • |\n| •   • |\n| •   • |\n|_______|\nYou got a six!" 
+    def diceFive():
+        return"⚄ --> You got a five!"
+
+    def diceSix():
+        return"⚅ --> You got a six!" 
+

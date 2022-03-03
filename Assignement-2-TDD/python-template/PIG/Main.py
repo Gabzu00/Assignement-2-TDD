@@ -1,7 +1,6 @@
 """Detta motsvarar vår main -> vår meny"""
 
-from Player import Player_class
-
+import DiceHand
 
 def main():
     print("Instructions: ")
@@ -13,15 +12,12 @@ def main():
     print("")
     print("-------------------------------------------------------------------------------------------------------------")
     print("")
-    print("Type cheat if you want to win faster")
+    print("6. Type cheat if you want to win faster")
     
-    
-player_1 = Player_class("Samuel", 0)
+    start = DiceHand.Start
+    start.Throw()
 
 
-player_1.show_score()
-player_1.change_score(5)
-player_1.show_score()
 
 if __name__ == "__main__":
     main()

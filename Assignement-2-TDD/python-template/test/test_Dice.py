@@ -8,30 +8,31 @@ class TestDiceClass(unittest.TestCase):
         """Testa om funktionen genererar siffra mella 1 och 6"""
         res = Dice.throwDice()
         self.assertTrue(0 < res < 7)
-      
+        
+    """Testar om rätt symbol printas ut"""  
     def test_diceOne(self):
         res = Dice.diceOne()
-        self.assertTrue(res == " ______\n|      |\n|   •  |\n|______|\nYou got a one!")  
+        self.assertTrue(res == "⚀ --> You got a one!")  
         
     def test_diceTwo(self):
         res = Dice.diceTwo()
-        self.assertTrue(res == " ______\n|      |\n|  ••  |\n|______|\nYou got a two!")
+        self.assertTrue(res == "⚁ --> You got a two!")
         
     def test_diceThree(self):
         res = Dice.diceThree()
-        self.assertTrue(res == " ______\n|      |\n|  ••• |\n|______|\nYou got a three!")    
+        self.assertTrue(res == "⚂ --> You got a three!")    
         
     def test_diceFour(self):
         res = Dice.diceFour()
-        self.assertTrue(res == " ______\n|      |\n| •••• |\n|______|\nYou got a four!")
+        self.assertTrue(res == "⚃ --> You got a four!")
         
     def test_diceFive(self):
         res = Dice.diceFive()
-        self.assertTrue(res == " _______\n|       |\n| •   • |\n|   •   |\n| •   • |\n|_______|\nYou got a five!")
+        self.assertTrue(res == "⚄ --> You got a five!")
         
     def test_diceSix(self):
         res = Dice.diceSix()
-        self.assertTrue(res == " _______\n|       |\n| •   • |\n| •   • |\n| •   • |\n|_______|\nYou got a six!")
+        self.assertTrue(res == "⚅ --> You got a six!")
         
 if __name__ == "__main__":
     unittest.main()
