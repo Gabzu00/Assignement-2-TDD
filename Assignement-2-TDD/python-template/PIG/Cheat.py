@@ -1,2 +1,0 @@
-"""Koden för fusket"""
-

@@ -9,20 +9,20 @@ class dice:
     """Visa vilken symbol som man får"""
 
     def diceOne():
-        return"⚀ --> You got a one!"
+        return"⚀ --> It was a one!"
             
     def diceTwo():
-        return"⚁ --> You got a two!"
+        return"⚁ --> It was a two!"
 
     def diceThree():
-        return"⚂ --> You got a three!"
+        return"⚂ --> It was a three!"
 
     def diceFour():
-        return"⚃ --> You got a four!"
+        return"⚃ --> It was a four!"
 
     def diceFive():
-        return"⚄ --> You got a five!"
+        return"⚄ --> It was a five!"
 
     def diceSix():
-        return"⚅ --> You got a six!" 
+        return"⚅ --> It was a six!" 
 
