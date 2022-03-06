@@ -1,26 +1,25 @@
 """Visa rekordlista genom en List"""
-import Player
 
 def toFile(player):
-    
+    """Skriver in det nya rekordet till text fil"""
     with open ('HighScore.txt', 'w') as add:
-        new = Player.Player_class
-        first = str(new.getName(player))
-        second = str(new.getScore(player))
-        add.write(first)
-        add.write(second)
-        
+        add.write(str(player.__dict__))
+     
 def read():
+    """Printar det nuvarande rekordet"""
     with open('HighScore.txt', 'r') as show:
-        print(show.readlines())
-        
+        data = show.read().rstrip().replace('}', '').replace('{', '').replace("'", "")
+        print(data)
+
 def addHighScore(newSore, player):
-   with open('HighScore.txt', 'r') as ass:
-    for line in ass:
-        fields = line.strip().split()
-        fileScore = int(fields[1])
+
+   with open('HighScore.txt', 'r') as file:
     
-    if fileScore > newSore:
+    for line in file:
+        fields = line.strip('}').split(":")
+        fileScore = fields[-1]
+    
+    if int(fileScore) >= newSore:
         toFile(player)
     else :
         exit()

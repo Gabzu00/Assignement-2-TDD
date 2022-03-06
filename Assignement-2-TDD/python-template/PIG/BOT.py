@@ -1,0 +1,5 @@
+"""Funktionalitet för vår BOT"""
+
+    
+   
+        

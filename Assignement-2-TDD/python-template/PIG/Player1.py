@@ -1,4 +1,4 @@
-"""Lägga till ny spelare -> Spara spelare"""
+"""Lägga till ny spelare -> Spara spelare 1"""
 
 class Player_class:
     
