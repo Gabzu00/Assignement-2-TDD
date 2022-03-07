@@ -15,6 +15,17 @@ class Start():
     BOTScore = 0
     BOTTotal = 0
     
+    check = False
+    while check == False:
+        print("Choose difficulty: ")
+        print("1 --> Hard --> The BOT will get double point every time he adds to the total score")
+        print("2 --> Easy")
+        answer = input()
+        if answer == '1' or answer =='2':
+            check = True
+        else:
+            print("Invalid input\n")
+    
     """Ber spelaren om namn"""
     print("Hello!\nWelcome to our game!")
     PlayerName = input(f"Enter your name: ")
@@ -38,10 +49,17 @@ class Start():
             print(f"Total Score: {Start.player1Total}\n")
             
             """Frågar spelaren om hen vill fortsätta kasta eller inte"""
-            print("Enter 'Y' if you want to throw the dice")
-            print("Enter 'N' if you want to end the round")
-            print("Enter 'C' if you want to cheat")
-            answer = input("")
+            check = False
+            while check == False: 
+                print("Enter 'Y' if you want to throw the dice")
+                print("Enter 'N' if you want to end the round")
+                print("Enter 'C' if you want to cheat")
+                print("Enter 'Q' if you want to quit")     
+                answer = input("")
+                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q':
+                    check = True
+                else: 
+                    print("Invalid input\n")
 
             """Vad som ska hända beroende på svaret från spelaren"""
             if answer == 'Y':
@@ -49,11 +67,13 @@ class Start():
             elif answer == 'C':
                 Start.player1Total = 100
                 Start.Win()
-            else: 
-                print("You chose to stop")
+            elif answer == 'N': 
+                print("\nYou chose to stop")
                 Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.BotThrow()
+            else: 
+                exit()
  
     def Win():
         """Kolla om spelare har vunnit"""
@@ -105,7 +125,7 @@ class Start():
         Start.BOTScore += roll
         
         """Printar ut vad BOTen fick"""
-        print("BOT rolled the dice!")
+        print("\nBOT rolled the dice!")
         Start.printValue(roll)
         
         """Programmet ska vänta 2 sekunder så man hänger med i spelet"""
@@ -113,7 +133,7 @@ class Start():
         
         if roll == 1:
             Start.BOTScore = 0
-            print(f"\nNow its {Start.PlayerName} to play!")
+            print(f"Now its {Start.PlayerName} to play!")
             Start.startPlayer()
         else : 
             Start.option(roll)
@@ -121,6 +141,7 @@ class Start():
     def option(roll):
         keepGoing = True
         while keepGoing:
+            
             odds = random.randint(1,2)
             
             if odds == 1:
@@ -130,18 +151,32 @@ class Start():
                 Start.BotThrow()
             else: 
                 keepGoing = False
+                if Start.answer == '1':
+                    Start.BOTTotal += Start.BOTScore * 2
+                    Start.BOTScore = 0
+                    print("The BOT chose to stop")
                 
-                Start.BOTTotal += Start.BOTScore
-                Start.BOTScore = 0
-                print("The BOT chose to stop")
+                    print(f"\nTemporary Score: {Start.BOTScore}")
+                    print(f"Throws: {Start.BOTThrows}")
+                    print(f"Total Score: {Start.BOTTotal}\n")
+                else: 
+                    Start.BOTTotal += Start.BOTScore
+                    Start.BOTScore = 0
+                    print("The BOT chose to stop")
+                
+                    print(f"\nTemporary Score: {Start.BOTScore}")
+                    print(f"Throws: {Start.BOTThrows}")
+                    print(f"Total Score: {Start.BOTTotal}\n")
+                
                 time.sleep(3)
+                
                 if Start.BOTTotal >= 100:
                     print("The BOT won )=")
                     print(f"The BOT threw {Start.BOTThrows} times!!")
                     keepGoing = False
                     exit()
 
-                print(f"\nNow its {Start.PlayerName} to play")
+                print(f"Now its {Start.PlayerName} to play")
                 Start.startPlayer()
                 
     def printValue(roll):

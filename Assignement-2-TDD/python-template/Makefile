@@ -62,11 +62,11 @@ clean-all: clean clean-doc
 #
 pylint:
 	@$(call MESSAGE,$@)
-	-cd guess && $(PYTHON) -m pylint *.py
+	-cd PIG && $(PYTHON) -m pylint *.py
 
 flake8:
 	@$(call MESSAGE,$@)
-	-flake8
+	-cd PIG && $(PYTHON) -m flake8 *.py
 
 lint: flake8 pylint
 
