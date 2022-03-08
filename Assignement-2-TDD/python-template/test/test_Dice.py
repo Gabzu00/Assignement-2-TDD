@@ -40,3 +40,68 @@ class TestDiceClass(unittest.TestCase):
         res = Dice.dice
         exp = res.diceSix()
         self.assertTrue(exp == "⚅ --> It was a six!")
+        
+    def test_one(self):
+        res = Dice.dice
+        exp = res.diceOne()
+        self.assertFalse(exp == "⚀")
+        
+    def test_two(self):
+        res = Dice.dice
+        exp = res.diceTwo()
+        self.assertFalse(exp == "⚁")
+        
+    def test_three(self):
+        res = Dice.dice
+        exp = res.diceThree()
+        self.assertFalse(exp == "⚂")
+        
+    def test_four(self):
+        res = Dice.dice
+        exp = res.diceFour()
+        self.assertNotEqual(exp, "⚃")
+        
+    def test_five(self):
+        res = Dice.dice
+        exp = res.diceFive()
+        self.assertNotEqual(exp, "⚄")
+        
+    def test_six(self):
+        res = Dice.dice
+        exp = res.diceSix()
+        self.assertNotEqual(exp, "⚅")
+        
+    def test_throw_dice1(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertLess(exp, 7)
+        
+    def test_throw_dice2(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertLess(exp, 8)
+        
+    def test_throw_dice3(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertLess(exp, 9)
+        
+    def test_throw_dice4(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertGreater(exp, 0)
+    
+    def test_throw_dice5(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertLess(exp, 10)
+        
+    def test_throw_dice6(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertLess(exp, 11)
+        
+    def test_throw_dice7(self):
+        res = Dice.dice
+        exp = res.throwDice()
+        self.assertLess(exp, 12)
