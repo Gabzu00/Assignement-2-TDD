@@ -45,9 +45,10 @@ class Start():
                 print("Enter 'Y' if you want to throw the dice")
                 print("Enter 'N' if you want to end the round")
                 print("Enter 'C' if you want to cheat") 
-                print("Enter 'Q' if you want to quit")       
+                print("Enter 'Q' if you want to quit")
+                print("Enter 'W' if you want to change name")
                 answer = input("")
-                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q':
+                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q' or answer == 'W':
                     check = True
                 else: 
                     print("Invalid input\n")
@@ -64,6 +65,17 @@ class Start():
                 Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.startPlayer2()
+            elif answer == 'W':
+                print("Who wants to change name?")
+                print(f"{Start.Player1Name} --> Enter 1")
+                print(f"{Start.Player2Name} --> Enter 2")
+                whoChanges = input()
+                newName = input("Enter new name: ")
+                if whoChanges == "1":
+                    Start.player1.changeName(newName)
+                elif whoChanges == "2":
+                    Start.player2.changeName(newName)
+                Start.startPlayer1()
             else:
                 exit()
                 
@@ -109,9 +121,10 @@ class Start():
                 print("Enter 'Y' if you want to throw the dice")
                 print("Enter 'N' if you want to end the round")
                 print("Enter 'C' if you want to cheat")
-                print("Enter 'Q' if you want to quit")        
+                print("Enter 'Q' if you want to quit")
+                print("Enter 'W' if you want to change name")    
                 answer = input("")
-                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q':
+                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q' or answer == 'W':
                     check = True
                 else: 
                     print("Invalid input\n")
@@ -128,6 +141,17 @@ class Start():
                 Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.Player1Throw()
+            elif answer == 'W':
+                print("Who wants to change name?")
+                print(f"{Start.Player1Name}? --> Enter 1")
+                print(f"{Start.Player2Name}? --> Enter 2")
+                whoChanges = input()
+                newName = input("Enter new name: ")
+                if whoChanges == "1":
+                    Start.player1.changeName(newName)
+                elif whoChanges == "2":
+                    Start.player2.changeName(newName)
+                Start.startPlayer2()
             else: 
                 exit()
             

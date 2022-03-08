@@ -17,3 +17,6 @@ class Player_class:
         
     def getScore(self):
         print(self.score)
+
+    def changeName(self, name):
+        self.name = name
