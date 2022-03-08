@@ -35,7 +35,7 @@ class Start():
     
     """Visa vem som har highscore"""
     print("\nCurrent highscore: ")
-    HighScore.read()
+    HighScore.checkHighScore.read()
 
     def startPlayer():
         
@@ -89,7 +89,8 @@ class Start():
         Start.player.ThrowScore(Start.player1Throws)
         
         """Om någon vinner kollar man om det är ett highscore eller inte """
-        HighScore.addHighScore(Start.player1Throws, Start.player)
+        check = HighScore.checkHighScore
+        check.addHighScore(Start.player1Throws, Start.player)
         print("New highscore!!!")
         exit()
     

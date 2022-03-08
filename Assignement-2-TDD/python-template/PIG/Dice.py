@@ -1,7 +1,9 @@
+"""Importerar random och skapar vår dice klass"""
 import random
 
 class dice:
-    
+    """Funktionerna för dice"""
+
     def throwDice():
         """Generera siffra mellan 1 och 6"""
         return random.randint(1,6)
@@ -10,7 +12,7 @@ class dice:
 
     def diceOne():
         return"⚀ --> It was a one!"
-            
+
     def diceTwo():
         return"⚁ --> It was a two!"
 
@@ -24,5 +26,4 @@ class dice:
         return"⚄ --> It was a five!"
 
     def diceSix():
-        return"⚅ --> It was a six!" 
-
+        return"⚅ --> It was a six!"
