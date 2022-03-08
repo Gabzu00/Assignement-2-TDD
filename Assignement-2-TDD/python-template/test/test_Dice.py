@@ -14,8 +14,8 @@ class TestDiceClass(unittest.TestCase):
     def test_diceOne(self):
         res = Dice.dice
         exp = res.diceOne()
-        self.assertTrue(exp == "⚀ --> It was a one!") 
-        
+        self.assertTrue(exp == "⚀ --> It was a one!")
+
     def test_diceTwo(self):
         res = Dice.dice
         exp = res.diceTwo()
@@ -24,7 +24,7 @@ class TestDiceClass(unittest.TestCase):
     def test_diceThree(self):
         res = Dice.dice
         exp = res.diceThree()
-        self.assertTrue(exp == "⚂ --> It was a three!")    
+        self.assertTrue(exp == "⚂ --> It was a three!")
         
     def test_diceFour(self):
         res = Dice.dice

@@ -1,11 +1,15 @@
-"""Detta motsvarar vår main -> vår meny"""
+"""Detta motsvarar vår main -> vår meny."""
+import PvP
+import PvE
+
 
 class startMain():
-
+    """Här startar vår program."""
     def main():
+        """Frågar om spelaren vill spela PvP eller PvE."""
         check = False
         while check == False:
-            print("Pvp --> press '1'")
+            print("PvP --> press '1'")
             print("PvE --> press '2'")
             answer = input()
             if answer == '1' or answer =='2':
@@ -13,7 +17,6 @@ class startMain():
             else:
                 print("Invalid input")
 
-    
         print("\nInstructions: ")
         print("1. Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to hold:")
         print("2. If the player rolls a 1, they score nothing and it becomes the next player's turn")
@@ -23,11 +26,12 @@ class startMain():
         print("6. If you choose to cheat you will immediately get 100 point and win the game\n")
 
         if answer == '1':
-            import PvP
+            PvP.Start.init()
             PvP.Start.startPlayer1()
         else:
-            import PvE
+            PvE.Start.init()
             PvE.Start.startPlayer()
 
-    if __name__ == "__main__":
-        main()
+
+if __name__ == "__main__":
+    startMain.main()
