@@ -38,7 +38,6 @@ class Start():
     HighScore.checkHighScore.read()
 
     def startPlayer():
-        
         if Start.player1Total >= 100:
             Start.Win()
         else: 
