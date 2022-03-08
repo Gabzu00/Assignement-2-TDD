@@ -1,25 +1,24 @@
 """Visa rekordlista genom en List."""
-
+import os
 
 class checkHighScore():
     """Metoder för klassen."""
 
     def toFile(player):
         """Skriver in det nya rekordet till text fil."""
-        with open('HighScore.txt', 'w') as add:
+        with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/PIG/HighScore.txt', 'w') as add:
             add.write(str(player.__dict__))
 
     def read():
         """Printar det nuvarande rekordet."""
-        with open('HighScore.txt', 'r') as show:
+        with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/PIG/HighScore.txt', 'r') as show:
             data = show.read().rstrip().replace('}', '')
             data2 = data.replace('{', '').replace("'", "")
             print(data2)
 
     def addHighScore(newSore, player):
         """Läser från filen och tar ut det senaste rekordet."""
-        with open('HighScore.txt', 'r') as file:
-
+        with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/PIG/HighScore.txt', 'r') as file:
             for line in file:
                 fields = line.strip('}').split(":")
                 fileScore = fields[-1]
