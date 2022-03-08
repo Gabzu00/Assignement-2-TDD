@@ -54,9 +54,10 @@ class Start():
                 print("Enter 'Y' if you want to throw the dice")
                 print("Enter 'N' if you want to end the round")
                 print("Enter 'C' if you want to cheat")
-                print("Enter 'Q' if you want to quit")     
+                print("Enter 'Q' if you want to quit") 
+                print("Enter 'W' if you want to change name")    
                 answer = input("")
-                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q':
+                if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q' or answer == 'W':
                     check = True
                 else: 
                     print("Invalid input\n")
@@ -72,6 +73,10 @@ class Start():
                 Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.BotThrow()
+            elif answer == 'W':
+                newName = input("Enter new name: ")
+                Start.player.changeName(newName)
+                Start.startPlayer()
             else: 
                 exit()
  
