@@ -5,7 +5,7 @@ import Dice
 import time
 
 class Start():
-    
+
     """Spelarnas poäng"""
     player1Throws = 0
     player1Score = 0
@@ -15,20 +15,28 @@ class Start():
     player2Score = 0
     player2Total = 0
     
-    """Ber spelare 1 om namn"""
-    print("Hello!\nWelcome to our game!")
-    Player1Name = input(f"Enter name for player 1: ")
+    """Variablel för spelare 1 namn"""
+    Player1Name = "test1"
     
-    """Ber spelare 2 om namn"""
-    Player2Name = input(f"Enter name for player 2: ")
+    """Variablel för spelare 2 namn"""
+    Player2Name = "test2"
     
-    player1 = Player1.Player_class(Player1Name, 0)
-    player2 = Player2.Player_class(Player2Name, 0)
+    player1 = Player1.Player_class
+    player2 = Player2.Player_class
     
-    """Visa vem som har highscore"""
-    print("\nCurrent highscore: ")
-    HighScore.read()
-    print(f"\nNow its {Player1Name} to start")
+    def init():
+        """Ber spelar 1 och 2 om namn"""
+        print("Hello!\nWelcome to our game!")
+        Start.Player1Name = input(f"Enter name for player 1: ")
+        Start.Player2Name = input(f"Enter name for player 2: ")
+        
+        """Visa vem som har highscore"""
+        print("\nCurrent highscore: ")
+        HighScore.checkHighScore.read()
+        print(f"\nNow its {Start.Player1Name} to start")
+        
+        Start.player1 = Player1.Player_class(Start.Player1Name, 0)
+        Start.player2 = Player2.Player_class(Start.Player2Name, 0)
     
     def startPlayer1():
         if Start.player1Total >= 100:
@@ -191,7 +199,7 @@ class Start():
         Start.player1.ThrowScore(Start.player1Throws)
         
         """Om någon vinner kollar man om det är ett highscore eller inte """
-        HighScore.addHighScore(Start.player1Throws, Start.player1)
+        HighScore.checkHighScore.addHighScore(Start.player1Throws, Start.player1)
         print("New highscore!!!")
         exit()  
         
@@ -204,7 +212,7 @@ class Start():
         Start.player2.ThrowScore(Start.player2Throws)
         
         """Om någon vinner kollar man om det är ett highscore eller inte """
-        HighScore.addHighScore(Start.player2Throws, Start.player2)
+        HighScore.checkHighScore.addHighScore(Start.player2Throws, Start.player2)
         print("New highscore!!!")
         exit()
         

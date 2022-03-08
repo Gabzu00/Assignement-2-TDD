@@ -15,27 +15,35 @@ class Start():
     BOTScore = 0
     BOTTotal = 0
     
-    check = False
-    while check == False:
-        print("Choose difficulty: ")
-        print("1 --> Hard --> The BOT will get double point every time he adds to the total score")
-        print("2 --> Easy")
-        answer = input()
-        if answer == '1' or answer =='2':
-            check = True
-        else:
-            print("Invalid input\n")
-    
-    """Ber spelaren om namn"""
-    print("Hello!\nWelcome to our game!")
-    PlayerName = input(f"Enter your name: ")
+    difficulty = 0
+    PlayerName = ""
     
     """Skapar spelar objekt"""
-    player = Player1.Player_class(PlayerName, 0)
+    player = Player1.Player_class
     
-    """Visa vem som har highscore"""
-    print("\nCurrent highscore: ")
-    HighScore.checkHighScore.read()
+    def init():
+        check = False
+        while check == False:
+            print("Choose difficulty: ")
+            print("1 --> Hard --> The BOT will get double point every time he adds to the total score")
+            print("2 --> Easy")
+            Start.difficulty = input()
+            if Start.difficulty == '1' or Start.difficulty =='2':
+                check = True
+            else:
+                print("Invalid input\n")
+            
+        """Ber spelaren om namn"""
+        print("Hello!\nWelcome to our game!")
+        Start.PlayerName = input(f"Enter your name: ")
+        
+        """Lägget till namn och score i spelar object"""
+        Start.player = Player1.Player_class(Start.PlayerName, 0)
+        
+        """Visa vem som har highscore"""
+        print("\nCurrent highscore: ")
+        HighScore.checkHighScore.read()
+        
 
     def startPlayer():
         
@@ -54,12 +62,8 @@ class Start():
                 print("Enter 'Y' if you want to throw the dice")
                 print("Enter 'N' if you want to end the round")
                 print("Enter 'C' if you want to cheat")
-<<<<<<< HEAD
-                print("Enter 'Q' if you want to quit")    
-=======
                 print("Enter 'Q' if you want to quit") 
                 print("Enter 'W' if you want to change name")    
->>>>>>> fa9a9b57a9417fdcfaa61b7411e6fbc372f1bf7e
                 answer = input("")
                 if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q' or answer == 'W':
                     check = True
@@ -161,7 +165,7 @@ class Start():
                 Start.BotThrow()
             else: 
                 keepGoing = False
-                if Start.answer == '1':
+                if Start.difficulty == '1':
                     Start.BOTTotal += Start.BOTScore * 2
                     Start.BOTScore = 0
                     print("The BOT chose to stop")

@@ -1,4 +1,6 @@
 """Detta motsvarar vår main -> vår meny"""
+import PvP
+import PvE
 
 class startMain():
     
@@ -24,11 +26,11 @@ class startMain():
         print("6. If you choose to cheat you will immediately get 100 point and win the game\n")
  
         if answer == '1':
-            import PvP
+            PvP.Start.init()
             PvP.Start.startPlayer1()
         else:
-            import PvE
+            PvE.Start.init()
             PvE.Start.startPlayer()
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    startMain.main()
