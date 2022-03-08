@@ -15,7 +15,7 @@ class checkHighScore():
     def addHighScore(newSore, player):
         """Läser från filen och tar ut det senaste rekordet"""
         with open('HighScore.txt', 'r') as file:
-    
+
             for line in file:
                 fields = line.strip('}').split(":")
                 fileScore = fields[-1]
@@ -25,9 +25,3 @@ class checkHighScore():
                 checkHighScore.toFile(player)
             else :
                 exit()
-
-
-
-
-
-

@@ -54,7 +54,7 @@ class Start():
                 print("Enter 'Y' if you want to throw the dice")
                 print("Enter 'N' if you want to end the round")
                 print("Enter 'C' if you want to cheat")
-                print("Enter 'Q' if you want to quit")     
+                print("Enter 'Q' if you want to quit")    
                 answer = input("")
                 if answer == 'Y' or answer == 'N' or answer == 'C' or answer == 'Q':
                     check = True

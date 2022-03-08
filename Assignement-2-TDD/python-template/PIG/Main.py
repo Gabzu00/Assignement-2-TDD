@@ -1,8 +1,9 @@
 """Detta motsvarar vår main -> vår meny"""
 
 class startMain():
-
+    
     def main():
+        
         check = False
         while check == False:
             print("Pvp --> press '1'")
@@ -21,7 +22,7 @@ class startMain():
         print("4. If a player chooses to hold, their turn total is added to their score, and it becomes the next player's turn.")
         print("5. The first player to score 100 or more points wins.")
         print("6. If you choose to cheat you will immediately get 100 point and win the game\n")
-
+ 
         if answer == '1':
             import PvP
             PvP.Start.startPlayer1()
