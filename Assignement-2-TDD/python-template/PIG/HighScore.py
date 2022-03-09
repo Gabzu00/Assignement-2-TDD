@@ -19,6 +19,9 @@ class checkHighScore():
     def addHighScore(newSore, player):
         """Läser från filen och tar ut det senaste rekordet."""
         with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/PIG/HighScore.txt', 'r') as file:
+            if os.stat(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/PIG/HighScore.txt').st_size == 0:
+                checkHighScore.toFile(player)
+
             for line in file:
                 fields = line.strip('}').split(":")
                 fileScore = fields[-1]
