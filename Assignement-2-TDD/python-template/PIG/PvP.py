@@ -87,11 +87,13 @@ class Start():
                 newName = input("Enter new name: ")
                 if whoChanges == "1":
                     Start.player1.changeName(newName)
+                    Start.Player1Name = newName
                 elif whoChanges == "2":
                     Start.player2.changeName(newName)
+                    Start.Player2Name = newName
                 Start.startPlayer1()
             else:
-                exit()
+                print("End")
 
     def Player1Throw():
         """Add throws."""
@@ -168,7 +170,7 @@ class Start():
                     Start.player2.changeName(newName)
                 Start.startPlayer2()
             else:
-                exit()
+                print("End")
 
     def Player2Throw():
         """Add throws."""
@@ -208,7 +210,7 @@ class Start():
         call = HighScore.checkHighScore
         call.addHighScore(Start.player1Throws, Start.player1)
         print("New highscore!!!")
-        exit()
+        print("End")
 
     def Win2():
         """Kolla om spelare har vunnit."""
@@ -222,7 +224,7 @@ class Start():
         call = HighScore.checkHighScore
         call.addHighScore(Start.player2Throws, Start.player2)
         print("New highscore!!!")
-        exit()
+        print("End")
 
     def printValue(roll):
         """Instanciera ett object från Dice klassen."""
