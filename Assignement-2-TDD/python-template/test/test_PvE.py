@@ -2,6 +2,10 @@
 from tabnanny import check
 import unittest
 from PIG import PvE
+import io
+import sys
+import os
+
 
 class TestPvEClass(unittest.TestCase):
 
@@ -10,7 +14,16 @@ class TestPvEClass(unittest.TestCase):
         self.assertEqual(res, 0)
 
     def test_init(self):
-        res = PvE.Start
-        exp = res.init(check)
-        self.assertEqual(exp, False)
-        
+        res = PvE.Start.init()
+        exp = PvE.Start.init()
+        self.assertEqual(exp, res)
+
+    #def test_startPlayer(self):
+    #    capturedOutput = sys.stdout
+    #    sys.stdout = io.StringIO()
+    #    res = PvE.Start
+    #    res.startPlayer()
+    #    sys.stdout = sys.__stdout__
+    #    exp = res.difficulty
+
+    #    self.assertTrue(res == 0)
