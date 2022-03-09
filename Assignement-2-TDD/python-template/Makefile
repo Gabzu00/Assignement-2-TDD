@@ -10,6 +10,8 @@ MESSAGE = printf "\033[32;01m---> $(1)\033[0m\n"
 
 all:
 
+play:
+	python -m PIG.Main
 
 # ---------------------------------------------------------
 # Check the current python executable.
@@ -86,7 +88,7 @@ codestyle: black
 #
 unittest:
 	@$(call MESSAGE,$@)
-	 $(PYTHON) -m unittest test
+	 $(PYTHON) -m unittest discover
 
 coverage:
 	@$(call MESSAGE,$@)

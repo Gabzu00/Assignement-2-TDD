@@ -3,8 +3,8 @@
 # import sys
 # import os 
 # sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/PIG")
-import PvP
-import PvE
+from . import PvP
+from . import PvE
 
 
 class startMain():
@@ -20,7 +20,7 @@ class startMain():
                 check = True
             else:
                 print("Invalid input")
-
+        """Instruktioner."""
         print("\nInstructions: ")
         print("1. Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to hold:")
         print("2. If the player rolls a 1, they score nothing and it becomes the next player's turn")
@@ -29,6 +29,7 @@ class startMain():
         print("5. The first player to score 100 or more points wins.")
         print("6. If you choose to cheat you will immediately get 100 point and win the game\n")
 
+        """Om spelaren svarar 1 eller 2."""
         if answer == '1':
             PvP.Start.init()
             PvP.Start.startPlayer1()

@@ -1,8 +1,8 @@
 """imports."""
-import HighScore
-import Player1
-import Player2
-import Dice
+from . import HighScore
+from . import Player1
+from . import Player2
+from . import Dice
 import time
 
 
@@ -23,6 +23,7 @@ class Start():
     """Variablel för spelare 2 namn."""
     Player2Name = "test2"
 
+    """Skapar spelar objekt."""
     player1 = Player1.Player_class
     player2 = Player2.Player_class
 
@@ -37,6 +38,7 @@ class Start():
         HighScore.checkHighScore.read()
         print(f"\nNow its {Start.Player1Name} to start")
 
+        """Sätter namn och poäng till spelar objekt."""        
         Start.player1 = Player1.Player_class(Start.Player1Name, 0)
         Start.player2 = Player2.Player_class(Start.Player2Name, 0)
 

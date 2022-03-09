@@ -1,9 +1,9 @@
 """Imports för klassen."""
-import Dice
-import Player1
+from. import Dice
+from. import Player1
 import random
 import time
-import HighScore
+from. import HighScore
 
 
 class Start():
@@ -57,7 +57,7 @@ class Start():
             print(f"Throws: {Start.player1Throws}")
             print(f"Total Score: {Start.player1Total}\n")
 
-            """Frågar spelaren om hen vill fortsätta kasta eller inte."""
+            """Frågar spelaren om vad hen vill göra härnest."""
             check = False
             while check == False:
                 print("Enter 'Y' if you want to throw the dice")
@@ -148,6 +148,7 @@ class Start():
         """Programmet ska vänta 2 sekunder så man hänger med i spelet."""
         time.sleep(3)
 
+        """Vad som ska hända om BOTen får en etta eller annan siffra."""
         if roll == 1:
             Start.BOTScore = 0
             print(f"Now its {Start.PlayerName} to play!")
@@ -159,9 +160,9 @@ class Start():
         """Om botten ska kasta igen eller stanna."""
         keepGoing = True
         while keepGoing:
-
+            """Generera en random siffra mellan 1 och 2."""
             odds = random.randint(1, 2)
-
+            """Botten kastar igen."""
             if odds == 1:
                 print(f"\nTemporarilyScore: {Start.BOTScore}")
                 print(f"Throws: {Start.BOTThrows}")
@@ -169,6 +170,8 @@ class Start():
                 Start.BotThrow()
             else:
                 keepGoing = False
+                """Svårighetsgrad appliceras beroende på tidigare val."""
+                """Botten stannar."""
                 if Start.difficulty == '1':
                     Start.BOTTotal += Start.BOTScore * 2
                     Start.BOTScore = 0
@@ -185,9 +188,9 @@ class Start():
                     print(f"\nTemporary Score: {Start.BOTScore}")
                     print(f"Throws: {Start.BOTThrows}")
                     print(f"Total Score: {Start.BOTTotal}\n")
-
+                """Programmet väntar 3 sekunder."""
                 time.sleep(3)
-
+                """Kollar om botten har vunnit"""
                 if Start.BOTTotal >= 100:
                     print("The BOT won )=")
                     print(f"The BOT threw {Start.BOTThrows} times!!")
