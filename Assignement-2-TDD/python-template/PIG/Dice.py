@@ -13,24 +13,24 @@ class dice:
 
     def diceOne():
         """Medelande som ska visas."""
-        return"⚀ --> It was a one!"
+        return"[1] --> It was a one!"
 
     def diceTwo():
         """Medelande som ska visas."""
-        return"⚁ --> It was a two!"
+        return"[2] --> It was a two!"
 
     def diceThree():
         """Medelande som ska visas."""
-        return"⚂ --> It was a three!"
+        return"[3] --> It was a three!"
 
     def diceFour():
         """Medelande som ska visas."""
-        return"⚃ --> It was a four!"
+        return"[4] --> It was a four!"
 
     def diceFive():
         """Medelande som ska visas."""
-        return"⚄ --> It was a five!"
+        return"[5] --> It was a five!"
 
     def diceSix():
         """Medelande som ska visas."""
-        return"⚅ --> It was a six!"
+        return"[6] --> It was a six!"
