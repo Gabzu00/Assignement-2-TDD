@@ -77,7 +77,6 @@ class Start():
             elif answer == 'N':
                 print("\nYou chose to stop")
                 print(f"Now its {Start.Player2Name} to play")
-                Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.startPlayer2()
             elif answer == 'W':
@@ -155,9 +154,8 @@ class Start():
             elif answer == 'N':
                 print("\nYou chose to stop")
                 print(f"Now its {Start.Player1Name} to play")
-                Start.player1Total += Start.player1Score
-                Start.player1Score = 0
-                Start.Player1Throw()
+                Start.player2Score = 0
+                Start.startPlayer1()
             elif answer == 'W':
                 print("Who wants to change name?")
                 print(f"{Start.Player1Name}? --> Enter 1")
@@ -194,8 +192,8 @@ class Start():
             print(f"\nNow its {Start.Player1Name} to play")
             Start.startPlayer1()
         else:
-            Start.player1Score += roll
-            Start.player1Total += roll
+            Start.player2Score += roll
+            Start.player2Total += roll
             Start.startPlayer2()
 
     def Win1():
