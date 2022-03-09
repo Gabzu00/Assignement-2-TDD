@@ -81,7 +81,7 @@ class Start():
                 Start.Win()
             elif answer == 'N':
                 print("\nYou chose to stop")
-                Start.player1Total += Start.player1Score
+                #Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.BotThrow()
             elif answer == 'W':

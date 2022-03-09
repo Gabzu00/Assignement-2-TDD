@@ -1,5 +1,4 @@
 """Tester för PvE klassen."""
-from tabnanny import check
 import unittest
 from PIG import PvE
 
@@ -9,8 +8,7 @@ class TestPvEClass(unittest.TestCase):
         res = PvE.Start.player1Throws
         self.assertEqual(res, 0)
 
-    def test_init(self):
-        res = PvE.Start
-        exp = res.init(check)
-        self.assertEqual(exp, False)
+    # def test_init(self):
+    #     res = PvE.Start.init()
+    #     self.assertEqual(res, )
         
