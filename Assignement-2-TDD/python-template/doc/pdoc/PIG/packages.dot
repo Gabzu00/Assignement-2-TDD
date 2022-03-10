@@ -1,0 +1,12 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"PIG" [color="black", label="PIG", shape="box", style="solid"];
+"PIG.Dice" [color="black", label="PIG.Dice", shape="box", style="solid"];
+"PIG.HighScore" [color="black", label="PIG.HighScore", shape="box", style="solid"];
+"PIG.Main" [color="black", label="PIG.Main", shape="box", style="solid"];
+"PIG.Player1" [color="black", label="PIG.Player1", shape="box", style="solid"];
+"PIG.Player2" [color="black", label="PIG.Player2", shape="box", style="solid"];
+"PIG.PvE" [color="black", label="PIG.PvE", shape="box", style="solid"];
+"PIG.PvP" [color="black", label="PIG.PvP", shape="box", style="solid"];
+}
