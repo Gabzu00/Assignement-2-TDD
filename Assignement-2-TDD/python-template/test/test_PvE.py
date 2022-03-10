@@ -19,7 +19,7 @@ class TestPvEClass(unittest.TestCase):
         playerName = "Gabriel"
         with mock.patch('builtins.input', side_effect=["2" ,playerName]):
             myInstance.init()
-        
+
         self.assertTrue(playerName  == myInstance.PlayerName)
         self.assertTrue("Hello" in mock_stdout.getvalue())
      

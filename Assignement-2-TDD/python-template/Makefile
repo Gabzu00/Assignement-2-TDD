@@ -10,6 +10,7 @@ MESSAGE = printf "\033[32;01m---> $(1)\033[0m\n"
 
 all:
 
+
 play:
 	python -m PIG.Main
 
@@ -106,17 +107,17 @@ test: lint coverage
 pydoc:
 	@$(call MESSAGE,$@)
 	install -d doc/pydoc
-	$(PYTHON) -m pydoc -w PIG/*.py
+	$(PYTHON) -m pydoc -w PIG/
 	mv *.html doc/pydoc
 
 pdoc:
 	@$(call MESSAGE,$@)
-	pdoc --force --html --output-dir doc/pdoc PIG/*.py
+	pdoc --force --html --output-dir doc/pdoc PIG/
 
 pyreverse:
 	@$(call MESSAGE,$@)
 	install -d doc/pyreverse
-	pyreverse PIG/*.py
+	pyreverse PIG/
 	dot -Tpng classes.dot -o doc/pyreverse/classes.png
 	dot -Tpng packages.dot -o doc/pyreverse/packages.png
 	rm -f classes.dot packages.dot
