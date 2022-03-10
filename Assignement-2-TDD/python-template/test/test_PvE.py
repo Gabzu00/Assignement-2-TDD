@@ -8,26 +8,6 @@ from unittest.mock import patch
 
 class TestPvEClass(unittest.TestCase):
 
-<<<<<<< HEAD
-    def test_class_Start(self):
-        res = PvE.Start.player1Throws
-        self.assertEqual(res, 0)
-
-    def test_init(self):
-        res = PvE.Start.init()
-        exp = PvE.Start.init()
-        self.assertEqual(exp, res)
-
-    #def test_startPlayer(self):
-    #    capturedOutput = sys.stdout
-    #    sys.stdout = io.StringIO()
-    #    res = PvE.Start
-    #    res.startPlayer()
-    #    sys.stdout = sys.__stdout__
-    #    exp = res.difficulty
-
-    #    self.assertTrue(res == 0)
-=======
     def test_class_start(self):
         res = PvE.Start
         exp = res.PlayerName
@@ -92,4 +72,3 @@ class TestPvEClass(unittest.TestCase):
     #     self.assertTrue("play" in mock_stdout.getvalue())
 
 
->>>>>>> a8f9d358e53992ef1752642e93d9e71397e302dc
