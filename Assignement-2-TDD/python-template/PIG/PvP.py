@@ -18,10 +18,10 @@ class Start():
     player2Total = 0
 
     """Variablel för spelare 1 namn."""
-    Player1Name = "test1"
+    Player1Name = ""
 
     """Variablel för spelare 2 namn."""
-    Player2Name = "test2"
+    Player2Name = ""
 
     """Skapar spelar objekt."""
     player1 = Player1.Player_class
@@ -53,8 +53,8 @@ class Start():
             print(f"Total Score: {Start.player1Total}\n")
 
             """Frågar spelaren om hen vill fortsätta kasta eller inte."""
-            check = False
-            while check == False:
+            check = True
+            while check == True:
                 print("Enter 'Y' if you want to throw the dice")
                 print("Enter 'N' if you want to end the round")
                 print("Enter 'C' if you want to cheat")
@@ -62,9 +62,9 @@ class Start():
                 print("Enter 'W' if you want to change name")
                 answer = input("")
                 if answer == 'Y' or answer == 'N':
-                    check = True
+                    check = False
                 elif answer == 'C' or answer == 'Q' or answer == 'W':
-                    check = True
+                    check = False
                 else:
                     print("Invalid input\n")
 
@@ -151,7 +151,7 @@ class Start():
             if answer == 'Y':
                 Start.Player2Throw()
             elif answer == 'C':
-                Start.player1Total = 100
+                Start.player2Total = 100
                 Start.Win2()
             elif answer == 'N':
                 print("\nYou chose to stop")
