@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {'name': 'asd', 'score': 1}
+=======
+{'name': 'Gabbe', 'score': 0}
+>>>>>>> a8f9d358e53992ef1752642e93d9e71397e302dc

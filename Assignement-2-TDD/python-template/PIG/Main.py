@@ -1,8 +1,4 @@
 """Detta motsvarar vår main -> vår meny."""
-
-# import sys
-# import os 
-# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/PIG")
 from . import PvP
 from . import PvE
 

@@ -30,4 +30,4 @@ class checkHighScore():
             if int(fileScore) >= newSore:
                 checkHighScore.toFile(player)
             else:
-                exit()
+                print("End")

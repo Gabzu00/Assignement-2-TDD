@@ -28,8 +28,8 @@ class Start():
         while check == False:
             print("Choose difficulty: ")
             print("1 --> Hard")
-            print("2 --> Easy")
             print("Hard = The BOT will get double point")
+            print("2 --> Easy")
             Start.difficulty = input()
             if Start.difficulty == '1' or Start.difficulty == '2':
                 check = True
@@ -81,15 +81,15 @@ class Start():
                 Start.Win()
             elif answer == 'N':
                 print("\nYou chose to stop")
-                #Start.player1Total += Start.player1Score
                 Start.player1Score = 0
                 Start.BotThrow()
             elif answer == 'W':
                 newName = input("Enter new name: ")
+                Start.PlayerName = newName
                 Start.player.changeName(newName)
                 Start.startPlayer()
             else:
-                exit()
+                print("End")
 
     def Win():
         """Kolla om spelare har vunnit."""
@@ -103,7 +103,7 @@ class Start():
         check = HighScore.checkHighScore
         check.addHighScore(Start.player1Throws, Start.player)
         print("New highscore!!!")
-        exit()
+        print("End")
 
     def PlayerThrow():
         """Add throws."""
@@ -195,7 +195,7 @@ class Start():
                     print("The BOT won )=")
                     print(f"The BOT threw {Start.BOTThrows} times!!")
                     keepGoing = False
-                    exit()
+                    print("End")
 
                 print(f"Now its {Start.PlayerName} to play")
                 Start.startPlayer()
