@@ -97,8 +97,26 @@ make coverage
 make test
 ```
 
-You can open a web browser to inspect the code coverage as a generated HTML report.
+### Generate Documentation and UML diagram
 
-```
-firefox htmlcov/index.html
-```
+We need to install the dot command to help generating the UML pictures from the source code structure when we are using pyreverse. The dot command is part of the package called graphviz and you can install it using your package manager.
+
+If you use Chocolatey package manager, start Powershell as administrator and run the following command: 
+
+choco install graphviz
+
+After the installation is done you can check what version you got with the following command: 
+
+dot -V
+
+# Generate Documentation
+
+make pdoc
+
+or 
+
+make doc
+
+# Generate UML Diagram
+
+make pyreverse

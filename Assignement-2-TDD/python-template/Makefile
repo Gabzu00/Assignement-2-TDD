@@ -124,10 +124,6 @@ pyreverse:
 
 doc: pdoc pyreverse #pydoc sphinx
 
-UML: 
-	pyreverse PIG/
-	dot -Tpng classes.dot -o PIG_export.png
-
 
 # ---------------------------------------------------------
 # Calculate software metrics for your project.
