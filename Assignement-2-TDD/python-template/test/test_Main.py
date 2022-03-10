@@ -1,10 +1,16 @@
-# import unittest
-# from PIG import Main
-# import sys
+import unittest
+import unittest.mock
+from PIG import Main
 
-# class TestMainClass(unittest.TestCase):
+class TestMainClass(unittest.TestCase):
     
-#     def test_foo(self):                           
-#         Main.startMain.main()                                   
-#         sys.stdout = sys.__stdout__                 
-#         print("Test av output", sys.stdout)
+    @unittest.mock.patch('builtins.print')
+    def test_Main(self, mock_print):
+
+        test = Main.startMain.main()
+        res = Main.startMain.main()
+
+        args, _ = mock_print.call_args
+        print(args)
+
+        self.assertTrue(res, test)

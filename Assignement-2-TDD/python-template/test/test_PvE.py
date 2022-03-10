@@ -12,7 +12,6 @@ class TestPvEClass(unittest.TestCase):
         res = PvE.Start.player1Throws
         self.assertEqual(res, 0)
 
-<<<<<<< HEAD
     def test_init(self):
         res = PvE.Start.init()
         exp = PvE.Start.init()
@@ -27,9 +26,3 @@ class TestPvEClass(unittest.TestCase):
     #    exp = res.difficulty
 
     #    self.assertTrue(res == 0)
-=======
-    # def test_init(self):
-    #     res = PvE.Start.init()
-    #     self.assertEqual(res, )
-        
->>>>>>> 47cb1a2f99e38546b55cbdd28477e217c1874efb
