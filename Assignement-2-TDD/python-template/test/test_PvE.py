@@ -4,6 +4,7 @@ from unittest import mock
 from PIG import PvE
 import io
 from unittest.mock import patch
+from PIG import Dice
 
 
 class TestPvEClass(unittest.TestCase):
@@ -20,17 +21,18 @@ class TestPvEClass(unittest.TestCase):
         """Testar classen test.init."""
         myInstance = PvE.Start
         playerName = "Gabriel"
-        with mock.patch('builtins.input', side_effect=["2", playerName]):
+        with mock.patch('builtins.input', side_effect=["0", "2", playerName]):
             myInstance.init()
 
         self.assertTrue(playerName == myInstance.PlayerName)
         self.assertTrue("Hello" in mock_stdout.getvalue())
 
+
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_startPlayerChangeName(self, mock_stdout):
         """Testar om det går att byta namn och om temporary printas."""
         myInstance = PvE.Start
-        with mock.patch('builtins.input', side_effect=["W", "Gabbe", "Q"]):
+        with mock.patch('builtins.input', side_effect=["X", "W", "Gabbe", "Q"]):
             myInstance.startPlayer()
 
         self.assertTrue("Gabbe" == myInstance.PlayerName)
@@ -44,7 +46,6 @@ class TestPvEClass(unittest.TestCase):
             myInstance.PlayerThrow()
 
         self.assertTrue("dice!" in mock_stdout.getvalue())
-        self.assertTrue("End" in mock_stdout.getvalue())
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_startPlayerCheat(self, mock_stdout):
@@ -56,21 +57,48 @@ class TestPvEClass(unittest.TestCase):
         self.assertTrue(myInstance.player1Total == 100)
         self.assertTrue("win!!!" in mock_stdout.getvalue())
 
-    # """Kollar att End printas om spelare väljer att avsluta."""
-    # @patch('sys.stdout', new_callable=io.StringIO)
-    # def test_startPlayer1End(self, mock_stdout):
-    #     myInstance = PvE.Start
-    #     with mock.patch('builtins.input', side_effect=["N", "Q"]):
-    #         myInstance.startPlayer()
+    """Kollar att End printas om spelare väljer att avsluta."""
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_startPlayer1End(self, mock_stdout):
+        myInstance = PvE.Start
+        myInstance.waitTime = 0
+        with mock.patch('builtins.input', side_effect=["N", "Q"]):
+            myInstance.startPlayer()
 
-    #     self.assertTrue("play" in mock_stdout.getvalue())
+        self.assertTrue("End" in mock_stdout.getvalue())
 
-    # @patch('sys.stdout', new_callable=io.StringIO)
-    # def test_startThrowDifficultBot(self, mock_stdout):
-    #     myInstance = PvE.Start
-    #     with mock.patch('builtins.input', side_effect=["1", "Player1"]):
-    #         myInstance.init()
-    #     with mock.patch('builtins.input', side_effect=["N", "Q"]):
-    #         myInstance.option(1)
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_startThrowDifficultBot(self, mock_stdout):
+        myInstance = PvE.Start
+        with mock.patch('builtins.input', side_effect=["1", "Player1"]):
+            myInstance.init()
+        with mock.patch('builtins.input', side_effect=["N", "Q"]):
+            myInstance.option()
 
-    #     self.assertTrue("End" in mock_stdout.getvalue())
+        self.assertTrue("stop" in mock_stdout.getvalue())
+        
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_startIfBotWin(self, mock_stdout):
+        myInstance = PvE.Start
+        myInstance.BOTTotal = 100
+        myInstance.option()
+
+        self.assertTrue(")=" in mock_stdout.getvalue())
+        
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_printValue2(self, mock_stdout):
+        myInstance = PvE.Start
+        myInstance.roll = 1
+        with mock.patch('builtins.input', side_effect=["1", "Player1", "Y"]):
+            myInstance.printValue(myInstance.roll)
+
+        self.assertTrue("[1]" in mock_stdout.getvalue())
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_ifPlayerWin(self, mock_stdout):
+        myInstance = PvE.Start
+        myInstance.player1Total = 100
+        with mock.patch('builtins.input', side_effect=["Y", "Q"]):
+            myInstance.startPlayer()
+
+        self.assertTrue("win" in mock_stdout.getvalue())

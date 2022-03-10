@@ -27,7 +27,7 @@ class TestPvPClass(unittest.TestCase):
 
     """Testar att change name ändrar till rätt namn och att end printas i slutet."""
     @patch('sys.stdout', new_callable=io.StringIO) 
-    def test_startPlayer1ChangeName(self, mock_stdout):
+    def test_startPlayer11ChangeName(self, mock_stdout):
         myInstance = PvP.Start
         with mock.patch('builtins.input', side_effect=["W", "1", "Gabbe", "Q"]):
             myInstance.startPlayer1()
@@ -37,10 +37,30 @@ class TestPvPClass(unittest.TestCase):
 
     """Kollat att spelare 2 ändrar sitt namn och att end printas i slutet."""
     @patch('sys.stdout', new_callable=io.StringIO) 
-    def test_startPlayer2ChangeName(self, mock_stdout):
+    def test_startPlayer12ChangeName(self, mock_stdout):
         myInstance = PvP.Start
         with mock.patch('builtins.input', side_effect=["W", "2", "Gabbe", "Q"]):
             myInstance.startPlayer1()
+        
+        self.assertTrue("Gabbe"  == myInstance.Player1Name)
+        self.assertTrue("End" in mock_stdout.getvalue())
+
+    """Testar att change name ändrar till rätt namn och att end printas i slutet."""
+    @patch('sys.stdout', new_callable=io.StringIO) 
+    def test_startPlayer21ChangeName(self, mock_stdout):
+        myInstance = PvP.Start
+        with mock.patch('builtins.input', side_effect=["W", "1", "Gabbe", "Q"]):
+            myInstance.startPlayer2()
+        
+        self.assertTrue("Gabbe"  == myInstance.Player1Name)
+        self.assertTrue("End" in mock_stdout.getvalue())
+
+    """Kollat att spelare 2 ändrar sitt namn och att end printas i slutet."""
+    @patch('sys.stdout', new_callable=io.StringIO) 
+    def test_startPlayer22ChangeName(self, mock_stdout):
+        myInstance = PvP.Start
+        with mock.patch('builtins.input', side_effect=["W", "2", "Gabbe", "Q"]):
+            myInstance.startPlayer2()
         
         self.assertTrue("Gabbe"  == myInstance.Player1Name)
         self.assertTrue("End" in mock_stdout.getvalue())
@@ -68,7 +88,7 @@ class TestPvPClass(unittest.TestCase):
     @patch('sys.stdout', new_callable=io.StringIO) 
     def test_startPlayer1End(self, mock_stdout):
         myInstance = PvP.Start
-        with mock.patch('builtins.input', side_effect=["N"]):
+        with mock.patch('builtins.input', side_effect=["N", "Q"]):
             myInstance.startPlayer1()
         
         self.assertTrue("End" in mock_stdout.getvalue())
@@ -77,8 +97,17 @@ class TestPvPClass(unittest.TestCase):
     @patch('sys.stdout', new_callable=io.StringIO) 
     def test_startPlayer2(self, mock_stdout):
         myInstance = PvP.Start
-        with mock.patch('builtins.input', side_effect=["Y", "Q"]):
+        with mock.patch('builtins.input', side_effect=["P", "Y", "Q"]):
             myInstance.startPlayer2()
+        
+        self.assertTrue("End" in mock_stdout.getvalue())
+
+    """Kollar att tärningen kastas och att End printas i slutet."""
+    @patch('sys.stdout', new_callable=io.StringIO) 
+    def test_startPlayer1(self, mock_stdout):
+        myInstance = PvP.Start
+        with mock.patch('builtins.input', side_effect=["P", "Y", "Q"]):
+            myInstance.startPlayer1()
         
         self.assertTrue("End" in mock_stdout.getvalue())
 
@@ -109,13 +138,7 @@ class TestPvPClass(unittest.TestCase):
             myInstance.Player2Throw()
         
         self.assertTrue("End" in mock_stdout.getvalue())
-        
-        
-        
-        
-        
-        
-        
+    
         
         
     # @patch('sys.stdout', new_callable=io.StringIO)
