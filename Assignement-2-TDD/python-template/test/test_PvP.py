@@ -9,8 +9,8 @@ class TestPvPClass(unittest.TestCase):
     
     def test_class_start(self):
         res = PvP.Start
-        exp = res.Player1Name
-        self.assertEqual(exp, "")
+        exp = res.player1Score
+        self.assertEqual(exp, 0)
     
     """Testa init namn och att Hello printas."""
     @patch('sys.stdout', new_callable=io.StringIO) 
@@ -109,6 +109,14 @@ class TestPvPClass(unittest.TestCase):
             myInstance.Player2Throw()
         
         self.assertTrue("End" in mock_stdout.getvalue())
+        
+        
+        
+        
+        
+        
+        
+        
         
     # @patch('sys.stdout', new_callable=io.StringIO)
     # def test_Win1(self, mock_stdout):

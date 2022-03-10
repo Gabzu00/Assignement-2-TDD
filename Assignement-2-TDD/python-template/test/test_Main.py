@@ -1,16 +1,24 @@
-import unittest
-import unittest.mock
+"""Tester för PvE klassen."""
+import unittest 
+from unittest import mock
 from PIG import Main
+import io
+from unittest.mock import patch
 
-class TestMainClass(unittest.TestCase):
+class TestPvEClass(unittest.TestCase):
     
-    @unittest.mock.patch('builtins.print')
-    def test_Main(self, mock_print):
-
-        test = Main.startMain.main()
-        res = Main.startMain.main()
-
-        args, _ = mock_print.call_args
-        print(args)
-
-        self.assertTrue(res, test)
+    @patch('sys.stdout', new_callable=io.StringIO) 
+    def test_startPlayer1End(self, mock_stdout):
+        myInstance = Main.startMain
+        with mock.patch('builtins.input', side_effect=["2", "1", "Gabriel", "Q"]):
+            myInstance.main()
+        
+        self.assertTrue("Instructions" in mock_stdout.getvalue())
+        
+    @patch('sys.stdout', new_callable=io.StringIO) 
+    def test_startPlayer2End(self, mock_stdout):
+        myInstance = Main.startMain
+        with mock.patch('builtins.input', side_effect=["1", "n1", "n2", "Q"]):
+            myInstance.main()
+        
+        self.assertTrue("End" in mock_stdout.getvalue())

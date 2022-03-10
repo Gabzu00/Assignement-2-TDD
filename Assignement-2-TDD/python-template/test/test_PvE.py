@@ -10,8 +10,8 @@ class TestPvEClass(unittest.TestCase):
 
     def test_class_start(self):
         res = PvE.Start
-        exp = res.PlayerName
-        self.assertEqual(exp, "")
+        exp = res.player1Score
+        self.assertEqual(exp, 0)
         
     @patch('sys.stdout', new_callable=io.StringIO) 
     def test_init(self, mock_stdout):
@@ -53,22 +53,23 @@ class TestPvEClass(unittest.TestCase):
         self.assertTrue(myInstance.player1Total == 100)
         self.assertTrue("win!!!" in mock_stdout.getvalue())
         
-    """Kollar att End printas om spelare väljer att avsluta."""
-    @patch('sys.stdout', new_callable=io.StringIO) 
-    def test_startPlayer1End(self, mock_stdout):
-        myInstance = PvE.Start
-        with mock.patch('builtins.input', side_effect=["N", "Q"]):
-            myInstance.startPlayer()
-        
-        self.assertTrue("play" in mock_stdout.getvalue())
-        
     # """Kollar att End printas om spelare väljer att avsluta."""
     # @patch('sys.stdout', new_callable=io.StringIO) 
-    # def test_option(self, mock_stdout):
+    # def test_startPlayer1End(self, mock_stdout):
     #     myInstance = PvE.Start
     #     with mock.patch('builtins.input', side_effect=["N", "Q"]):
-    #         myInstance.option()
+    #         myInstance.startPlayer()
         
     #     self.assertTrue("play" in mock_stdout.getvalue())
+        
+    # @patch('sys.stdout', new_callable=io.StringIO) 
+    # def test_startThrowDifficultBot(self, mock_stdout):
+    #     myInstance = PvE.Start
+    #     with mock.patch('builtins.input', side_effect=["1", "Player1"]):
+    #         myInstance.init()
+    #     with mock.patch('builtins.input', side_effect=["N", "Q"]):
+    #         myInstance.option(1)
+
+    #     self.assertTrue("End" in mock_stdout.getvalue())
 
 
