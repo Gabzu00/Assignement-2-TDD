@@ -9,7 +9,7 @@ class TestPlayer1Class(unittest.TestCase):
         """Testa om funktionen skapar ett objekt."""
         res = Player1.Player_class("Test", 0)
         self.assertIsInstance(res, object)
-    
+
     def test_throw_score(self):
         """Testa om man kan ändra spelarens poäng."""
         res = Player1.Player_class("Test", 0)
