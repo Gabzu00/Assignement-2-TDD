@@ -106,23 +106,26 @@ test: lint coverage
 pydoc:
 	@$(call MESSAGE,$@)
 	install -d doc/pydoc
-	$(PYTHON) -m pydoc -w PIG/*.py
+	$(PYTHON) -m pydoc -w PIG/
 	mv *.html doc/pydoc
 
 pdoc:
 	@$(call MESSAGE,$@)
-	pdoc --force --html --output-dir doc/pdoc PIG/*.py
+	pdoc --force --html --output-dir doc/pdoc PIG/
 
 pyreverse:
 	@$(call MESSAGE,$@)
 	install -d doc/pyreverse
-	pyreverse PIG/*.py
+	pyreverse PIG/
 	dot -Tpng classes.dot -o doc/pyreverse/classes.png
 	dot -Tpng packages.dot -o doc/pyreverse/packages.png
 	rm -f classes.dot packages.dot
 
 doc: pdoc pyreverse #pydoc sphinx
 
+UML: 
+	pyreverse PIG/
+	dot -Tpng classes.dot -o PIG_export.png
 
 
 # ---------------------------------------------------------
