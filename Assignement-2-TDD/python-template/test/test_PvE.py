@@ -23,11 +23,7 @@ class TestPvEClass(unittest.TestCase):
         with mock.patch('builtins.input', side_effect=["2", playerName]):
             myInstance.init()
 
-<<<<<<< HEAD
-        self.assertTrue(playerName  == myInstance.PlayerName)
-=======
         self.assertTrue(playerName == myInstance.PlayerName)
->>>>>>> 5d3817ba1b820a7bc1b457bd3b1ffd86e0bf454c
         self.assertTrue("Hello" in mock_stdout.getvalue())
 
     @patch('sys.stdout', new_callable=io.StringIO)

@@ -1,28 +1,30 @@
 Release history
-========================
+========================================
 
-Decide on a way how to handled your relaeases and version numbers. Document it here.
+(03-03-2022)
+----------------------------------------
+* Added game functionality 
 
-For example like this...
+(04-03-2022)
+----------------------------------------
+* Updated version of the game
 
+(06-03-2022)
+----------------------------------------
+* Added PvP and PvE. Improved the game
 
+(07-03-2022)
+----------------------------------------
+* Added handeling of bad input
 
-v2.0.0 (2022-02-05)
-------------------------
+(09-03-2022)
+----------------------------------------
+* Testcases for highscore done
 
-* Moved to a new location.
+(09-03-2022)
+----------------------------------------
+* Update for test_PvP
 
-
-
-v1.1.0 (2021-02-12)
-------------------------
-
-* Enabling generating documentation from comments using pdoc and pydoc.
-* Enabling UML documentation using pyreverse.
-
-
-
-v1.0.0 (2021-02-12)
-------------------------
-
-* First release, extracted from course material and further developed.
+(10-03-2022)
+----------------------------------------
+* Update test_PvP and added test_PvE

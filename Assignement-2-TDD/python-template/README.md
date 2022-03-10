@@ -1,50 +1,34 @@
-Python development project template
+# Assignement-2-TDD
+
 ==========================
-
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
-A template for a Python development project.
-
-[[_TOC_]]
-
-
-
 Get going
 --------------------------
 
-This is how you can work with the development environment.
-
-
-
 ### Check version of Python
+
+You have to have Python installed. To check if it's installed and what version you have you 
+can write "python --version" in the Command prompt.
 
 Check what version of Python you have. The Makefile uses `PYTHON=python` as default.
 
-```
-# Check you Python installation
-make version
-```
 
-If you have another naming of the Python executable then you can solve that using an environment variable. This is common on Mac and Linux.
+### Install Make
 
-```
-# Set the environment variable to be your python executable
-export PYTHON=python3
-make version
-```
+1. Install the Windows packet manager Chocolatey: https://chocolatey.org/install
 
-Read more on [GNU make](https://www.gnu.org/software/make/manual/make.html).
+2. Install GNU make using "choco install make" using PowerShell (you might need to run the terminal as admin).
 
+3. Open a new window for Git Bash and check that it works be checking what version you have using make --version.
 
 
 ### Python virtual environment
 
 Install a Python virtual environment and activate it.
 
-```
-# Create the virtual environment
-make venv
+install: 
+python -m venv .venv
 
+```
 # Activate on Windows
 . .venv/Scripts/activate
 
@@ -54,9 +38,6 @@ make venv
 
 When you are done you can leave the venv using the command `deactivate`.
 
-Read more on [Python venv](https://docs.python.org/3/library/venv.html).
-
-
 
 ### Install the dependencies
 
@@ -64,29 +45,27 @@ Install the PIP packages that are dependencies to the project and/or the develop
 
 Do not forget to check that you have an active venv.
 
+Navigate to the game folder in your terminal: \Assignment 2\Assignement-2-TDD\Assignement-2-TDD\python-template
+
 ```
 # Do install them
 make install
 
+or
+
+python -m pip install -r requirements.txt
+
 # Check what is installed
+
 make installed
-```
-
-Read more on [Python PIP](https://pypi.org/project/pip/).
-
 
 
 ### Run the code
 
-The example program can be started like this.
+The game has to be started by typing this into the terminal:
 
-```
-# Execute the main program
-python guess/main.py
-```
 
-All code is stored below the directory `guess/`.
-
+make play
 
 
 ### Run the validators
@@ -101,14 +80,6 @@ make pylint
 # Run all on the same time
 make lint
 ```
-
-You might need to update the Makefile if you change the name of the source directory currently named `guess/`.
-
-Read more on:
-
-* [flake8](https://flake8.pycqa.org/en/latest/)
-* [pylint](https://pylint.org/)
-
 
 
 ### Run the unittests
@@ -126,75 +97,26 @@ make coverage
 make test
 ```
 
-You can open a web browser to inspect the code coverage as a generated HTML report.
+### Generate Documentation and UML diagram
 
-```
-firefox htmlcov/index.html
-```
+We need to install the dot command to help generating the UML pictures from the source code structure when we are using pyreverse. The dot command is part of the package called graphviz and you can install it using your package manager.
 
-Read more on:
+If you use Chocolatey package manager, start Powershell as administrator and run the following command: 
 
-* [unittest](https://docs.python.org/3/library/unittest.html)
-* [coverage](https://coverage.readthedocs.io/)
+choco install graphviz
 
+After the installation is done you can check what version you got with the following command: 
 
+dot -V
 
-### Run parts of the testsuite
+# Generate Documentation
 
-You can also run parts of the testsuite, for examples files or methods in files.
+make pdoc
 
-You can run all tests from a testfile.
+or 
 
-```
-# Run a testfile
-python -m unittest test.test_game
-```
+make doc
 
-You can also run a single testcase from a file.
+# Generate UML Diagram
 
-```
-# Run a test method, in a class, in a testfile
-python -m unittest test.test_game.TestGameClass.test_init_default_object
-```
-
-
-
-### Remove generated files
-
-You can remove all generated files by this.
-
-```
-# Remove files generated for tests or caching
-make clean
-
-# Do also remove all you have installed
-make clean-all
-```
-
-
-
-Optional targets
---------------------------
-
-These targets might be helpful when running your project.
-
-
-
-### Codestyle with black
-
-You can unify the codestyle using black. Running black will change your source code to have a codestyle according to black codestyle.
-
-```
-# Same same, different names
-make black
-make codestyle
-```
-
-Read more on [black](https://pypi.org/project/black/).
-
-
-
-More targets
---------------------------
-
-The Makefile contains more targets, they are however not yet tested on this directory structure.
+make pyreverse
