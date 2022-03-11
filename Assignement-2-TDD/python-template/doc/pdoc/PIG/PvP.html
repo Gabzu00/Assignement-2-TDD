@@ -36,8 +36,8 @@ import time
 
 
 class Start():
-    
     &#34;&#34;&#34;Spelarnas poäng.&#34;&#34;&#34;
+
     player1Throws = 0
     player1Score = 0
     player1Total = 0
@@ -67,7 +67,7 @@ class Start():
         HighScore.checkHighScore.read()
         print(f&#34;\nNow its {Start.Player1Name} to start&#34;)
 
-        &#34;&#34;&#34;Sätter namn och poäng till spelar objekt.&#34;&#34;&#34;        
+        &#34;&#34;&#34;Sätter namn och poäng till spelar objekt.&#34;&#34;&#34;
         Start.player1 = Player1.Player_class(Start.Player1Name, 0)
         Start.player2 = Player2.Player_class(Start.Player2Name, 0)
 
@@ -195,8 +195,10 @@ class Start():
                 newName = input(&#34;Enter new name: &#34;)
                 if whoChanges == &#34;1&#34;:
                     Start.player1.changeName(newName)
+                    Start.Player1Name = newName
                 elif whoChanges == &#34;2&#34;:
                     Start.player2.changeName(newName)
+                    Start.Player2Name = newName
                 Start.startPlayer2()
             else:
                 print(&#34;End&#34;)
@@ -238,7 +240,6 @@ class Start():
         &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
         call = HighScore.checkHighScore
         call.addHighScore(Start.player1Throws, Start.player1)
-        print(&#34;New highscore!!!&#34;)
         print(&#34;End&#34;)
 
     def Win2():
@@ -252,7 +253,6 @@ class Start():
         &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
         call = HighScore.checkHighScore
         call.addHighScore(Start.player2Throws, Start.player2)
-        print(&#34;New highscore!!!&#34;)
         print(&#34;End&#34;)
 
     def printValue(roll):
@@ -292,8 +292,8 @@ class Start():
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Start():
-    
     &#34;&#34;&#34;Spelarnas poäng.&#34;&#34;&#34;
+
     player1Throws = 0
     player1Score = 0
     player1Total = 0
@@ -323,7 +323,7 @@ class Start():
         HighScore.checkHighScore.read()
         print(f&#34;\nNow its {Start.Player1Name} to start&#34;)
 
-        &#34;&#34;&#34;Sätter namn och poäng till spelar objekt.&#34;&#34;&#34;        
+        &#34;&#34;&#34;Sätter namn och poäng till spelar objekt.&#34;&#34;&#34;
         Start.player1 = Player1.Player_class(Start.Player1Name, 0)
         Start.player2 = Player2.Player_class(Start.Player2Name, 0)
 
@@ -451,8 +451,10 @@ class Start():
                 newName = input(&#34;Enter new name: &#34;)
                 if whoChanges == &#34;1&#34;:
                     Start.player1.changeName(newName)
+                    Start.Player1Name = newName
                 elif whoChanges == &#34;2&#34;:
                     Start.player2.changeName(newName)
+                    Start.Player2Name = newName
                 Start.startPlayer2()
             else:
                 print(&#34;End&#34;)
@@ -494,7 +496,6 @@ class Start():
         &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
         call = HighScore.checkHighScore
         call.addHighScore(Start.player1Throws, Start.player1)
-        print(&#34;New highscore!!!&#34;)
         print(&#34;End&#34;)
 
     def Win2():
@@ -508,7 +509,6 @@ class Start():
         &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
         call = HighScore.checkHighScore
         call.addHighScore(Start.player2Throws, Start.player2)
-        print(&#34;New highscore!!!&#34;)
         print(&#34;End&#34;)
 
     def printValue(roll):
@@ -665,7 +665,6 @@ class Start():
     &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
     call = HighScore.checkHighScore
     call.addHighScore(Start.player1Throws, Start.player1)
-    print(&#34;New highscore!!!&#34;)
     print(&#34;End&#34;)</code></pre>
 </details>
 </dd>
@@ -689,7 +688,6 @@ class Start():
     &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
     call = HighScore.checkHighScore
     call.addHighScore(Start.player2Throws, Start.player2)
-    print(&#34;New highscore!!!&#34;)
     print(&#34;End&#34;)</code></pre>
 </details>
 </dd>
@@ -713,7 +711,7 @@ class Start():
     HighScore.checkHighScore.read()
     print(f&#34;\nNow its {Start.Player1Name} to start&#34;)
 
-    &#34;&#34;&#34;Sätter namn och poäng till spelar objekt.&#34;&#34;&#34;        
+    &#34;&#34;&#34;Sätter namn och poäng till spelar objekt.&#34;&#34;&#34;
     Start.player1 = Player1.Player_class(Start.Player1Name, 0)
     Start.player2 = Player2.Player_class(Start.Player2Name, 0)</code></pre>
 </details>
@@ -862,8 +860,10 @@ class Start():
             newName = input(&#34;Enter new name: &#34;)
             if whoChanges == &#34;1&#34;:
                 Start.player1.changeName(newName)
+                Start.Player1Name = newName
             elif whoChanges == &#34;2&#34;:
                 Start.player2.changeName(newName)
+                Start.Player2Name = newName
             Start.startPlayer2()
         else:
             print(&#34;End&#34;)</code></pre>

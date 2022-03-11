@@ -36,6 +36,10 @@ from. import HighScore
 
 
 class Start():
+    &#34;&#34;&#34;Variabel för väntetid.&#34;&#34;&#34;
+    
+    waitTime = 3
+
     &#34;&#34;&#34;Spelarens och bottens poäng.&#34;&#34;&#34;
 
     player1Throws = 0
@@ -48,11 +52,14 @@ class Start():
 
     difficulty = 0
     PlayerName = &#34;&#34;
-
+    roll = 0
+    botWon = False
+    keepGoing = True
     &#34;&#34;&#34;Skapar spelar objekt.&#34;&#34;&#34;
     player = Player1.Player_class
 
     def init():
+        &#34;&#34;&#34;Välj en svårighetsgrad.&#34;&#34;&#34;
         check = False
         while check == False:
             print(&#34;Choose difficulty: &#34;)
@@ -78,9 +85,8 @@ class Start():
 
     def startPlayer():
         &#34;&#34;&#34;Frågar spelaren om vad den vill göra.&#34;&#34;&#34;
-        if Start.player1Total &gt;= 100:
-            Start.Win()
-        else:
+        keepGoing = True
+        while keepGoing:
             &#34;&#34;&#34;Printar ut spelarens poäng och kast.&#34;&#34;&#34;
             print(f&#34;\nTemporary Score: {Start.player1Score}&#34;)
             print(f&#34;Throws: {Start.player1Throws}&#34;)
@@ -105,19 +111,23 @@ class Start():
             &#34;&#34;&#34;Vad som ska hända beroende på svaret från spelaren.&#34;&#34;&#34;
             if answer == &#39;Y&#39;:
                 Start.PlayerThrow()
+                if Start.player1Total &gt;= 100:
+                    Start.Win()
+                    keepGoing = False
             elif answer == &#39;C&#39;:
                 Start.player1Total = 100
                 Start.Win()
+                keepGoing = False
             elif answer == &#39;N&#39;:
                 print(&#34;\nYou chose to stop&#34;)
                 Start.player1Score = 0
-                Start.BotThrow()
+                Start.option()
             elif answer == &#39;W&#39;:
                 newName = input(&#34;Enter new name: &#34;)
                 Start.PlayerName = newName
                 Start.player.changeName(newName)
-                Start.startPlayer()
-            else:
+            elif answer == &#39;Q&#39;:
+                keepGoing = False
                 print(&#34;End&#34;)
 
     def Win():
@@ -131,7 +141,7 @@ class Start():
         &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
         check = HighScore.checkHighScore
         check.addHighScore(Start.player1Throws, Start.player)
-        print(&#34;New highscore!!!&#34;)
+        
         print(&#34;End&#34;)
 
     def PlayerThrow():
@@ -142,92 +152,98 @@ class Start():
         die = Dice.dice
 
         &#34;&#34;&#34;Använd objectet för att kastat tärningen.&#34;&#34;&#34;
-        roll = die.throwDice()
+        Start.roll = die.throwDice()
 
         &#34;&#34;&#34;Printa värdet som tärningen visade.&#34;&#34;&#34;
         print(&#34;You rolled the dice!&#34;)
-        Start.printValue(roll)
+        Start.printValue(Start.roll)
 
         &#34;&#34;&#34;Vad som ska hända om man slår en etta eller annan siffra.&#34;&#34;&#34;
-        if roll == 1:
-            time.sleep(3)
+        if Start.roll == 1:
             Start.player1Total -= Start.player1Score
             Start.player1Score = 0
-            Start.BotThrow()
+            Start.option()
         else:
-            Start.player1Score += roll
-            Start.player1Total += roll
-            Start.startPlayer()
+            Start.player1Score += Start.roll
+            Start.player1Total += Start.roll
 
     def BotThrow():
         &#34;&#34;&#34;Instanciera ett object från Dice klassen.&#34;&#34;&#34;
         die = Dice.dice
 
         &#34;&#34;&#34;Använd objectet för att kastat tärningen och printa värdet.&#34;&#34;&#34;
-        roll = die.throwDice()
+        Start.roll = die.throwDice()
 
         &#34;&#34;&#34;Lägger till poäng och kast.&#34;&#34;&#34;
         Start.BOTThrows += 1
-        Start.BOTScore += roll
+        Start.BOTScore += Start.roll
 
         &#34;&#34;&#34;Printar ut vad BOTen fick.&#34;&#34;&#34;
-        print(&#34;\nBOT rolled the dice!&#34;)
-        Start.printValue(roll)
+        print(&#34;\nBOT rolled the dice!&#34;, flush=True)
+
+        Start.printValue(Start.roll)
+        print(flush=True)
+
+        print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;)
+        print(f&#34;Throws: {Start.BOTThrows}&#34;)
+        print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;)
 
         &#34;&#34;&#34;Programmet ska vänta 2 sekunder så man hänger med i spelet.&#34;&#34;&#34;
-        time.sleep(3)
+        time.sleep(Start.waitTime)
 
         &#34;&#34;&#34;Vad som ska hända om BOTen får en etta eller annan siffra.&#34;&#34;&#34;
-        if roll == 1:
+        if Start.roll == 1:
             Start.BOTScore = 0
-            print(f&#34;Now its {Start.PlayerName} to play!&#34;)
-            Start.startPlayer()
-        else:
-            Start.option(roll)
+            Start.keepGoing = False 
 
-    def option(roll):
+    def option():
         &#34;&#34;&#34;Om botten ska kasta igen eller stanna.&#34;&#34;&#34;
-        keepGoing = True
-        while keepGoing:
+        Start.keepGoing = True
+        while Start.keepGoing:
             &#34;&#34;&#34;Generera en random siffra mellan 1 och 2.&#34;&#34;&#34;
-            odds = random.randint(1, 2)
+            odds = random.randint(1, 3)
             &#34;&#34;&#34;Botten kastar igen.&#34;&#34;&#34;
-            if odds == 1:
-                print(f&#34;\nTemporarilyScore: {Start.BOTScore}&#34;)
-                print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;)
+            if odds == 1 or 2:
                 Start.BotThrow()
             else:
-                keepGoing = False
+                Start.keepGoing = False
                 &#34;&#34;&#34;Svårighetsgrad appliceras beroende på tidigare val.&#34;&#34;&#34;
                 &#34;&#34;&#34;Botten stannar.&#34;&#34;&#34;
                 if Start.difficulty == &#39;1&#39;:
                     Start.BOTTotal += Start.BOTScore * 2
                     Start.BOTScore = 0
-                    print(&#34;The BOT chose to stop&#34;)
+                    print(&#34;\nThe BOT chose to stop&#34;, flush=True)
+                    print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;, flush=True)
+                    print(f&#34;Throws: {Start.BOTThrows}&#34;, flush=True)
+                    print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;, flush=True)
 
-                    print(f&#34;\nTemporary Score: {Start.BOTScore}&#34;)
-                    print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                    print(f&#34;Total Score: {Start.BOTTotal}\n&#34;)
+                    Start.keepGoing = False
+                    
+                    &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
+                    time.sleep(Start.waitTime)
                 else:
                     Start.BOTTotal += Start.BOTScore
                     Start.BOTScore = 0
-                    print(&#34;The BOT chose to stop&#34;)
+                    print(&#34;\nThe BOT chose to stop&#34;, flush=True)
+                    print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;, flush=True)
+                    print(f&#34;Throws: {Start.BOTThrows}&#34;, flush=True)
+                    print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;, flush=True)
 
-                    print(f&#34;\nTemporary Score: {Start.BOTScore}&#34;)
-                    print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                    print(f&#34;Total Score: {Start.BOTTotal}\n&#34;)
-                &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
-                time.sleep(3)
+                    Start.keepGoing = False
+                    
+                    &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
+                    time.sleep(Start.waitTime)
+
                 &#34;&#34;&#34;Kollar om botten har vunnit&#34;&#34;&#34;
                 if Start.BOTTotal &gt;= 100:
                     print(&#34;The BOT won )=&#34;)
                     print(f&#34;The BOT threw {Start.BOTThrows} times!!&#34;)
-                    keepGoing = False
+                    Start.keepGoing = False
+                    Start.botWon = True
                     print(&#34;End&#34;)
 
-                print(f&#34;Now its {Start.PlayerName} to play&#34;)
-                Start.startPlayer()
+        if not Start.botWon:
+            print(f&#34;Now its {Start.PlayerName} to play&#34;)
 
     def printValue(roll):
         &#34;&#34;&#34;Instanciera ett object från Dice klassen.&#34;&#34;&#34;
@@ -260,12 +276,16 @@ class Start():
 <span>class <span class="ident">Start</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Spelarens och bottens poäng.</p></div>
+<div class="desc"><p>Variabel för väntetid.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Start():
+    &#34;&#34;&#34;Variabel för väntetid.&#34;&#34;&#34;
+    
+    waitTime = 3
+
     &#34;&#34;&#34;Spelarens och bottens poäng.&#34;&#34;&#34;
 
     player1Throws = 0
@@ -278,11 +298,14 @@ class Start():
 
     difficulty = 0
     PlayerName = &#34;&#34;
-
+    roll = 0
+    botWon = False
+    keepGoing = True
     &#34;&#34;&#34;Skapar spelar objekt.&#34;&#34;&#34;
     player = Player1.Player_class
 
     def init():
+        &#34;&#34;&#34;Välj en svårighetsgrad.&#34;&#34;&#34;
         check = False
         while check == False:
             print(&#34;Choose difficulty: &#34;)
@@ -308,9 +331,8 @@ class Start():
 
     def startPlayer():
         &#34;&#34;&#34;Frågar spelaren om vad den vill göra.&#34;&#34;&#34;
-        if Start.player1Total &gt;= 100:
-            Start.Win()
-        else:
+        keepGoing = True
+        while keepGoing:
             &#34;&#34;&#34;Printar ut spelarens poäng och kast.&#34;&#34;&#34;
             print(f&#34;\nTemporary Score: {Start.player1Score}&#34;)
             print(f&#34;Throws: {Start.player1Throws}&#34;)
@@ -335,19 +357,23 @@ class Start():
             &#34;&#34;&#34;Vad som ska hända beroende på svaret från spelaren.&#34;&#34;&#34;
             if answer == &#39;Y&#39;:
                 Start.PlayerThrow()
+                if Start.player1Total &gt;= 100:
+                    Start.Win()
+                    keepGoing = False
             elif answer == &#39;C&#39;:
                 Start.player1Total = 100
                 Start.Win()
+                keepGoing = False
             elif answer == &#39;N&#39;:
                 print(&#34;\nYou chose to stop&#34;)
                 Start.player1Score = 0
-                Start.BotThrow()
+                Start.option()
             elif answer == &#39;W&#39;:
                 newName = input(&#34;Enter new name: &#34;)
                 Start.PlayerName = newName
                 Start.player.changeName(newName)
-                Start.startPlayer()
-            else:
+            elif answer == &#39;Q&#39;:
+                keepGoing = False
                 print(&#34;End&#34;)
 
     def Win():
@@ -361,7 +387,7 @@ class Start():
         &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
         check = HighScore.checkHighScore
         check.addHighScore(Start.player1Throws, Start.player)
-        print(&#34;New highscore!!!&#34;)
+        
         print(&#34;End&#34;)
 
     def PlayerThrow():
@@ -372,92 +398,98 @@ class Start():
         die = Dice.dice
 
         &#34;&#34;&#34;Använd objectet för att kastat tärningen.&#34;&#34;&#34;
-        roll = die.throwDice()
+        Start.roll = die.throwDice()
 
         &#34;&#34;&#34;Printa värdet som tärningen visade.&#34;&#34;&#34;
         print(&#34;You rolled the dice!&#34;)
-        Start.printValue(roll)
+        Start.printValue(Start.roll)
 
         &#34;&#34;&#34;Vad som ska hända om man slår en etta eller annan siffra.&#34;&#34;&#34;
-        if roll == 1:
-            time.sleep(3)
+        if Start.roll == 1:
             Start.player1Total -= Start.player1Score
             Start.player1Score = 0
-            Start.BotThrow()
+            Start.option()
         else:
-            Start.player1Score += roll
-            Start.player1Total += roll
-            Start.startPlayer()
+            Start.player1Score += Start.roll
+            Start.player1Total += Start.roll
 
     def BotThrow():
         &#34;&#34;&#34;Instanciera ett object från Dice klassen.&#34;&#34;&#34;
         die = Dice.dice
 
         &#34;&#34;&#34;Använd objectet för att kastat tärningen och printa värdet.&#34;&#34;&#34;
-        roll = die.throwDice()
+        Start.roll = die.throwDice()
 
         &#34;&#34;&#34;Lägger till poäng och kast.&#34;&#34;&#34;
         Start.BOTThrows += 1
-        Start.BOTScore += roll
+        Start.BOTScore += Start.roll
 
         &#34;&#34;&#34;Printar ut vad BOTen fick.&#34;&#34;&#34;
-        print(&#34;\nBOT rolled the dice!&#34;)
-        Start.printValue(roll)
+        print(&#34;\nBOT rolled the dice!&#34;, flush=True)
+
+        Start.printValue(Start.roll)
+        print(flush=True)
+
+        print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;)
+        print(f&#34;Throws: {Start.BOTThrows}&#34;)
+        print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;)
 
         &#34;&#34;&#34;Programmet ska vänta 2 sekunder så man hänger med i spelet.&#34;&#34;&#34;
-        time.sleep(3)
+        time.sleep(Start.waitTime)
 
         &#34;&#34;&#34;Vad som ska hända om BOTen får en etta eller annan siffra.&#34;&#34;&#34;
-        if roll == 1:
+        if Start.roll == 1:
             Start.BOTScore = 0
-            print(f&#34;Now its {Start.PlayerName} to play!&#34;)
-            Start.startPlayer()
-        else:
-            Start.option(roll)
+            Start.keepGoing = False 
 
-    def option(roll):
+    def option():
         &#34;&#34;&#34;Om botten ska kasta igen eller stanna.&#34;&#34;&#34;
-        keepGoing = True
-        while keepGoing:
+        Start.keepGoing = True
+        while Start.keepGoing:
             &#34;&#34;&#34;Generera en random siffra mellan 1 och 2.&#34;&#34;&#34;
-            odds = random.randint(1, 2)
+            odds = random.randint(1, 3)
             &#34;&#34;&#34;Botten kastar igen.&#34;&#34;&#34;
-            if odds == 1:
-                print(f&#34;\nTemporarilyScore: {Start.BOTScore}&#34;)
-                print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;)
+            if odds == 1 or 2:
                 Start.BotThrow()
             else:
-                keepGoing = False
+                Start.keepGoing = False
                 &#34;&#34;&#34;Svårighetsgrad appliceras beroende på tidigare val.&#34;&#34;&#34;
                 &#34;&#34;&#34;Botten stannar.&#34;&#34;&#34;
                 if Start.difficulty == &#39;1&#39;:
                     Start.BOTTotal += Start.BOTScore * 2
                     Start.BOTScore = 0
-                    print(&#34;The BOT chose to stop&#34;)
+                    print(&#34;\nThe BOT chose to stop&#34;, flush=True)
+                    print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;, flush=True)
+                    print(f&#34;Throws: {Start.BOTThrows}&#34;, flush=True)
+                    print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;, flush=True)
 
-                    print(f&#34;\nTemporary Score: {Start.BOTScore}&#34;)
-                    print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                    print(f&#34;Total Score: {Start.BOTTotal}\n&#34;)
+                    Start.keepGoing = False
+                    
+                    &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
+                    time.sleep(Start.waitTime)
                 else:
                     Start.BOTTotal += Start.BOTScore
                     Start.BOTScore = 0
-                    print(&#34;The BOT chose to stop&#34;)
+                    print(&#34;\nThe BOT chose to stop&#34;, flush=True)
+                    print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;, flush=True)
+                    print(f&#34;Throws: {Start.BOTThrows}&#34;, flush=True)
+                    print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;, flush=True)
 
-                    print(f&#34;\nTemporary Score: {Start.BOTScore}&#34;)
-                    print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                    print(f&#34;Total Score: {Start.BOTTotal}\n&#34;)
-                &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
-                time.sleep(3)
+                    Start.keepGoing = False
+                    
+                    &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
+                    time.sleep(Start.waitTime)
+
                 &#34;&#34;&#34;Kollar om botten har vunnit&#34;&#34;&#34;
                 if Start.BOTTotal &gt;= 100:
                     print(&#34;The BOT won )=&#34;)
                     print(f&#34;The BOT threw {Start.BOTThrows} times!!&#34;)
-                    keepGoing = False
+                    Start.keepGoing = False
+                    Start.botWon = True
                     print(&#34;End&#34;)
 
-                print(f&#34;Now its {Start.PlayerName} to play&#34;)
-                Start.startPlayer()
+        if not Start.botWon:
+            print(f&#34;Now its {Start.PlayerName} to play&#34;)
 
     def printValue(roll):
         &#34;&#34;&#34;Instanciera ett object från Dice klassen.&#34;&#34;&#34;
@@ -492,11 +524,19 @@ class Start():
 </dd>
 <dt id="PIG.PvE.Start.PlayerName"><code class="name">var <span class="ident">PlayerName</span></code></dt>
 <dd>
-<div class="desc"><p>Skapar spelar objekt.</p></div>
+<div class="desc"></div>
+</dd>
+<dt id="PIG.PvE.Start.botWon"><code class="name">var <span class="ident">botWon</span></code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 <dt id="PIG.PvE.Start.difficulty"><code class="name">var <span class="ident">difficulty</span></code></dt>
 <dd>
 <div class="desc"></div>
+</dd>
+<dt id="PIG.PvE.Start.keepGoing"><code class="name">var <span class="ident">keepGoing</span></code></dt>
+<dd>
+<div class="desc"><p>Skapar spelar objekt.</p></div>
 </dd>
 <dt id="PIG.PvE.Start.player"><code class="name">var <span class="ident">player</span></code></dt>
 <dd>
@@ -513,6 +553,14 @@ class Start():
 <dt id="PIG.PvE.Start.player1Total"><code class="name">var <span class="ident">player1Total</span></code></dt>
 <dd>
 <div class="desc"></div>
+</dd>
+<dt id="PIG.PvE.Start.roll"><code class="name">var <span class="ident">roll</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="PIG.PvE.Start.waitTime"><code class="name">var <span class="ident">waitTime</span></code></dt>
+<dd>
+<div class="desc"><p>Spelarens och bottens poäng.</p></div>
 </dd>
 </dl>
 <h3>Methods</h3>
@@ -531,26 +579,29 @@ class Start():
     die = Dice.dice
 
     &#34;&#34;&#34;Använd objectet för att kastat tärningen och printa värdet.&#34;&#34;&#34;
-    roll = die.throwDice()
+    Start.roll = die.throwDice()
 
     &#34;&#34;&#34;Lägger till poäng och kast.&#34;&#34;&#34;
     Start.BOTThrows += 1
-    Start.BOTScore += roll
+    Start.BOTScore += Start.roll
 
     &#34;&#34;&#34;Printar ut vad BOTen fick.&#34;&#34;&#34;
-    print(&#34;\nBOT rolled the dice!&#34;)
-    Start.printValue(roll)
+    print(&#34;\nBOT rolled the dice!&#34;, flush=True)
+
+    Start.printValue(Start.roll)
+    print(flush=True)
+
+    print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;)
+    print(f&#34;Throws: {Start.BOTThrows}&#34;)
+    print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;)
 
     &#34;&#34;&#34;Programmet ska vänta 2 sekunder så man hänger med i spelet.&#34;&#34;&#34;
-    time.sleep(3)
+    time.sleep(Start.waitTime)
 
     &#34;&#34;&#34;Vad som ska hända om BOTen får en etta eller annan siffra.&#34;&#34;&#34;
-    if roll == 1:
+    if Start.roll == 1:
         Start.BOTScore = 0
-        print(f&#34;Now its {Start.PlayerName} to play!&#34;)
-        Start.startPlayer()
-    else:
-        Start.option(roll)</code></pre>
+        Start.keepGoing = False </code></pre>
 </details>
 </dd>
 <dt id="PIG.PvE.Start.PlayerThrow"><code class="name flex">
@@ -570,22 +621,20 @@ class Start():
     die = Dice.dice
 
     &#34;&#34;&#34;Använd objectet för att kastat tärningen.&#34;&#34;&#34;
-    roll = die.throwDice()
+    Start.roll = die.throwDice()
 
     &#34;&#34;&#34;Printa värdet som tärningen visade.&#34;&#34;&#34;
     print(&#34;You rolled the dice!&#34;)
-    Start.printValue(roll)
+    Start.printValue(Start.roll)
 
     &#34;&#34;&#34;Vad som ska hända om man slår en etta eller annan siffra.&#34;&#34;&#34;
-    if roll == 1:
-        time.sleep(3)
+    if Start.roll == 1:
         Start.player1Total -= Start.player1Score
         Start.player1Score = 0
-        Start.BotThrow()
+        Start.option()
     else:
-        Start.player1Score += roll
-        Start.player1Total += roll
-        Start.startPlayer()</code></pre>
+        Start.player1Score += Start.roll
+        Start.player1Total += Start.roll</code></pre>
 </details>
 </dd>
 <dt id="PIG.PvE.Start.Win"><code class="name flex">
@@ -608,7 +657,7 @@ class Start():
     &#34;&#34;&#34;Om någon vinner kollar man om det är ett highscore eller inte.&#34;&#34;&#34;
     check = HighScore.checkHighScore
     check.addHighScore(Start.player1Throws, Start.player)
-    print(&#34;New highscore!!!&#34;)
+    
     print(&#34;End&#34;)</code></pre>
 </details>
 </dd>
@@ -616,12 +665,13 @@ class Start():
 <span>def <span class="ident">init</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Välj en svårighetsgrad.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def init():
+    &#34;&#34;&#34;Välj en svårighetsgrad.&#34;&#34;&#34;
     check = False
     while check == False:
         print(&#34;Choose difficulty: &#34;)
@@ -647,7 +697,7 @@ class Start():
 </details>
 </dd>
 <dt id="PIG.PvE.Start.option"><code class="name flex">
-<span>def <span class="ident">option</span></span>(<span>roll)</span>
+<span>def <span class="ident">option</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Om botten ska kasta igen eller stanna.</p></div>
@@ -655,49 +705,54 @@ class Start():
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def option(roll):
+<pre><code class="python">def option():
     &#34;&#34;&#34;Om botten ska kasta igen eller stanna.&#34;&#34;&#34;
-    keepGoing = True
-    while keepGoing:
+    Start.keepGoing = True
+    while Start.keepGoing:
         &#34;&#34;&#34;Generera en random siffra mellan 1 och 2.&#34;&#34;&#34;
-        odds = random.randint(1, 2)
+        odds = random.randint(1, 3)
         &#34;&#34;&#34;Botten kastar igen.&#34;&#34;&#34;
-        if odds == 1:
-            print(f&#34;\nTemporarilyScore: {Start.BOTScore}&#34;)
-            print(f&#34;Throws: {Start.BOTThrows}&#34;)
-            print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;)
+        if odds == 1 or 2:
             Start.BotThrow()
         else:
-            keepGoing = False
+            Start.keepGoing = False
             &#34;&#34;&#34;Svårighetsgrad appliceras beroende på tidigare val.&#34;&#34;&#34;
             &#34;&#34;&#34;Botten stannar.&#34;&#34;&#34;
             if Start.difficulty == &#39;1&#39;:
                 Start.BOTTotal += Start.BOTScore * 2
                 Start.BOTScore = 0
-                print(&#34;The BOT chose to stop&#34;)
+                print(&#34;\nThe BOT chose to stop&#34;, flush=True)
+                print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;, flush=True)
+                print(f&#34;Throws: {Start.BOTThrows}&#34;, flush=True)
+                print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;, flush=True)
 
-                print(f&#34;\nTemporary Score: {Start.BOTScore}&#34;)
-                print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                print(f&#34;Total Score: {Start.BOTTotal}\n&#34;)
+                Start.keepGoing = False
+                
+                &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
+                time.sleep(Start.waitTime)
             else:
                 Start.BOTTotal += Start.BOTScore
                 Start.BOTScore = 0
-                print(&#34;The BOT chose to stop&#34;)
+                print(&#34;\nThe BOT chose to stop&#34;, flush=True)
+                print(f&#34;TemporarilyScore: {Start.BOTScore}&#34;, flush=True)
+                print(f&#34;Throws: {Start.BOTThrows}&#34;, flush=True)
+                print(f&#34;TotalScore: {Start.BOTTotal}\n&#34;, flush=True)
 
-                print(f&#34;\nTemporary Score: {Start.BOTScore}&#34;)
-                print(f&#34;Throws: {Start.BOTThrows}&#34;)
-                print(f&#34;Total Score: {Start.BOTTotal}\n&#34;)
-            &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
-            time.sleep(3)
+                Start.keepGoing = False
+                
+                &#34;&#34;&#34;Programmet väntar 3 sekunder.&#34;&#34;&#34;
+                time.sleep(Start.waitTime)
+
             &#34;&#34;&#34;Kollar om botten har vunnit&#34;&#34;&#34;
             if Start.BOTTotal &gt;= 100:
                 print(&#34;The BOT won )=&#34;)
                 print(f&#34;The BOT threw {Start.BOTThrows} times!!&#34;)
-                keepGoing = False
+                Start.keepGoing = False
+                Start.botWon = True
                 print(&#34;End&#34;)
 
-            print(f&#34;Now its {Start.PlayerName} to play&#34;)
-            Start.startPlayer()</code></pre>
+    if not Start.botWon:
+        print(f&#34;Now its {Start.PlayerName} to play&#34;)</code></pre>
 </details>
 </dd>
 <dt id="PIG.PvE.Start.printValue"><code class="name flex">
@@ -738,9 +793,8 @@ class Start():
 </summary>
 <pre><code class="python">def startPlayer():
     &#34;&#34;&#34;Frågar spelaren om vad den vill göra.&#34;&#34;&#34;
-    if Start.player1Total &gt;= 100:
-        Start.Win()
-    else:
+    keepGoing = True
+    while keepGoing:
         &#34;&#34;&#34;Printar ut spelarens poäng och kast.&#34;&#34;&#34;
         print(f&#34;\nTemporary Score: {Start.player1Score}&#34;)
         print(f&#34;Throws: {Start.player1Throws}&#34;)
@@ -765,19 +819,23 @@ class Start():
         &#34;&#34;&#34;Vad som ska hända beroende på svaret från spelaren.&#34;&#34;&#34;
         if answer == &#39;Y&#39;:
             Start.PlayerThrow()
+            if Start.player1Total &gt;= 100:
+                Start.Win()
+                keepGoing = False
         elif answer == &#39;C&#39;:
             Start.player1Total = 100
             Start.Win()
+            keepGoing = False
         elif answer == &#39;N&#39;:
             print(&#34;\nYou chose to stop&#34;)
             Start.player1Score = 0
-            Start.BotThrow()
+            Start.option()
         elif answer == &#39;W&#39;:
             newName = input(&#34;Enter new name: &#34;)
             Start.PlayerName = newName
             Start.player.changeName(newName)
-            Start.startPlayer()
-        else:
+        elif answer == &#39;Q&#39;:
+            keepGoing = False
             print(&#34;End&#34;)</code></pre>
 </details>
 </dd>
@@ -809,15 +867,19 @@ class Start():
 <li><code><a title="PIG.PvE.Start.PlayerName" href="#PIG.PvE.Start.PlayerName">PlayerName</a></code></li>
 <li><code><a title="PIG.PvE.Start.PlayerThrow" href="#PIG.PvE.Start.PlayerThrow">PlayerThrow</a></code></li>
 <li><code><a title="PIG.PvE.Start.Win" href="#PIG.PvE.Start.Win">Win</a></code></li>
+<li><code><a title="PIG.PvE.Start.botWon" href="#PIG.PvE.Start.botWon">botWon</a></code></li>
 <li><code><a title="PIG.PvE.Start.difficulty" href="#PIG.PvE.Start.difficulty">difficulty</a></code></li>
 <li><code><a title="PIG.PvE.Start.init" href="#PIG.PvE.Start.init">init</a></code></li>
+<li><code><a title="PIG.PvE.Start.keepGoing" href="#PIG.PvE.Start.keepGoing">keepGoing</a></code></li>
 <li><code><a title="PIG.PvE.Start.option" href="#PIG.PvE.Start.option">option</a></code></li>
 <li><code><a title="PIG.PvE.Start.player" href="#PIG.PvE.Start.player">player</a></code></li>
 <li><code><a title="PIG.PvE.Start.player1Score" href="#PIG.PvE.Start.player1Score">player1Score</a></code></li>
 <li><code><a title="PIG.PvE.Start.player1Throws" href="#PIG.PvE.Start.player1Throws">player1Throws</a></code></li>
 <li><code><a title="PIG.PvE.Start.player1Total" href="#PIG.PvE.Start.player1Total">player1Total</a></code></li>
 <li><code><a title="PIG.PvE.Start.printValue" href="#PIG.PvE.Start.printValue">printValue</a></code></li>
+<li><code><a title="PIG.PvE.Start.roll" href="#PIG.PvE.Start.roll">roll</a></code></li>
 <li><code><a title="PIG.PvE.Start.startPlayer" href="#PIG.PvE.Start.startPlayer">startPlayer</a></code></li>
+<li><code><a title="PIG.PvE.Start.waitTime" href="#PIG.PvE.Start.waitTime">waitTime</a></code></li>
 </ul>
 </li>
 </ul>
