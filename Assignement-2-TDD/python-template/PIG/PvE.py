@@ -8,7 +8,7 @@ from. import HighScore
 
 class Start():
     """Variabel för väntetid."""
-    
+
     waitTime = 3
 
     """Spelarens och bottens poäng."""
@@ -112,7 +112,7 @@ class Start():
         """Om någon vinner kollar man om det är ett highscore eller inte."""
         check = HighScore.checkHighScore
         check.addHighScore(Start.player1Throws, Start.player)
-        
+
         print("End")
 
     def PlayerThrow():
@@ -165,7 +165,7 @@ class Start():
         """Vad som ska hända om BOTen får en etta eller annan siffra."""
         if Start.roll == 1:
             Start.BOTScore = 0
-            Start.keepGoing = False 
+            Start.keepGoing = False
 
     def option():
         """Om botten ska kasta igen eller stanna."""
@@ -189,7 +189,7 @@ class Start():
                     print(f"TotalScore: {Start.BOTTotal}\n", flush=True)
 
                     Start.keepGoing = False
-                    
+
                     """Programmet väntar 3 sekunder."""
                     time.sleep(Start.waitTime)
                 else:
@@ -201,7 +201,7 @@ class Start():
                     print(f"TotalScore: {Start.BOTTotal}\n", flush=True)
 
                     Start.keepGoing = False
-                    
+
                     """Programmet väntar 3 sekunder."""
                     time.sleep(Start.waitTime)
 

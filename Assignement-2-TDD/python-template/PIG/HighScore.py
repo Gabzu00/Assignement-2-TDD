@@ -1,6 +1,7 @@
 """Visa rekordlista genom en List."""
 import os
 
+
 class checkHighScore():
     """Metoder för klassen."""
 
@@ -30,4 +31,3 @@ class checkHighScore():
             if int(fileScore) >= newSore:
                 print("New highscore!!!")
                 checkHighScore.toFile(player)
-            

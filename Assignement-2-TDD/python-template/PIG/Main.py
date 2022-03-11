@@ -12,7 +12,7 @@ class startMain():
             print("PvP --> press '1'")
             print("PvE --> press '2'")
             answer = input()
-            if answer == '1' or answer =='2':
+            if answer == '1' or answer == '2':
                 check = True
             else:
                 print("Invalid input")
