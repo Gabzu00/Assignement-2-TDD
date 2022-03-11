@@ -3,6 +3,20 @@
 ### Made by Gabriel Petersson, Samuel Ahlvin and Alexander Carlsén
 ==========================
 
+# Description
+
+This is our Pig dice game. You can choose to play against the computer (PvE), or against a friend (PvP). When playing PvP the odds are even. 
+
+While playing the game the player has the option to roll the dice, to end the round, to cheat, to change name or to quit.
+
+When the player decides to cheat, he will immediately get 100 points in total, immediately making him the winner.
+
+When playing PvE, the computer's choice is based on a randomized number. The computer has a 66 % chance of rolling the dice, and a 33 % chance of ending the round.
+
+While playing against the computer, the user has the option to choose Hard or Easy game mode. We decided to make the implementation of the Hard mode by just multiplying the computer's total score by 2. This would make it easier for the computer to win the game.
+
+In both the game modes, if a player gets a new high score, it's stored in a text file called HighScore.txt. By doing this, the next time the player wants to play, the high score will be saved in the game.
+
 Get going
 --------------------------
 
