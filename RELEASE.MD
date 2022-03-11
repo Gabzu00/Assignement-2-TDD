@@ -28,3 +28,8 @@ Release history
 (10-03-2022)
 ----------------------------------------
 * Update test_PvP and added test_PvE
+
+(11-03-2022)
+----------------------------------------
+* Changed game functions and added 
+  doscstrings to testcases. 
