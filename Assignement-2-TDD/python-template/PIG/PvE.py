@@ -1,6 +1,4 @@
 """Imports för klassen."""
-from math import fabs
-from pickle import FALSE
 from. import Dice
 from. import Player1
 import random
@@ -9,10 +7,10 @@ from. import HighScore
 
 
 class Start():
-    
     """Variabel för väntetid."""
-    waitTime = 3
     
+    waitTime = 3
+
     """Spelarens och bottens poäng."""
 
     player1Throws = 0
@@ -27,10 +25,12 @@ class Start():
     PlayerName = ""
     roll = 0
     botWon = False
+    keepGoing = True
     """Skapar spelar objekt."""
     player = Player1.Player_class
 
     def init():
+        """Välj en svårighetsgrad."""
         check = False
         while check == False:
             print("Choose difficulty: ")
@@ -100,9 +100,6 @@ class Start():
             elif answer == 'Q':
                 keepGoing = False
                 print("End")
-            else:
-                keepGoing = False
-                print("End")
 
     def Win():
         """Kolla om spelare har vunnit."""
@@ -115,7 +112,7 @@ class Start():
         """Om någon vinner kollar man om det är ett highscore eller inte."""
         check = HighScore.checkHighScore
         check.addHighScore(Start.player1Throws, Start.player)
-        print("New highscore!!!")
+        
         print("End")
 
     def PlayerThrow():
@@ -154,8 +151,10 @@ class Start():
 
         """Printar ut vad BOTen fick."""
         print("\nBOT rolled the dice!", flush=True)
+
         Start.printValue(Start.roll)
-        
+        print(flush=True)
+
         print(f"TemporarilyScore: {Start.BOTScore}")
         print(f"Throws: {Start.BOTThrows}")
         print(f"TotalScore: {Start.BOTTotal}\n")
@@ -166,46 +165,54 @@ class Start():
         """Vad som ska hända om BOTen får en etta eller annan siffra."""
         if Start.roll == 1:
             Start.BOTScore = 0
-            print(f"Now its {Start.PlayerName} to play!")
+            Start.keepGoing = False 
 
     def option():
-        
         """Om botten ska kasta igen eller stanna."""
-        keepGoing = True
-        while keepGoing:
+        Start.keepGoing = True
+        while Start.keepGoing:
             """Generera en random siffra mellan 1 och 2."""
-            odds = random.randint(1, 2)
+            odds = random.randint(1, 3)
             """Botten kastar igen."""
-            if odds == 1:
+            if odds == 1 or 2:
                 Start.BotThrow()
             else:
-                keepGoing = False
+                Start.keepGoing = False
                 """Svårighetsgrad appliceras beroende på tidigare val."""
                 """Botten stannar."""
                 if Start.difficulty == '1':
                     Start.BOTTotal += Start.BOTScore * 2
                     Start.BOTScore = 0
-                    print("\nThe BOT chose to stop")
+                    print("\nThe BOT chose to stop", flush=True)
+                    print(f"TemporarilyScore: {Start.BOTScore}", flush=True)
+                    print(f"Throws: {Start.BOTThrows}", flush=True)
+                    print(f"TotalScore: {Start.BOTTotal}\n", flush=True)
+
+                    Start.keepGoing = False
                     
                     """Programmet väntar 3 sekunder."""
                     time.sleep(Start.waitTime)
                 else:
                     Start.BOTTotal += Start.BOTScore
                     Start.BOTScore = 0
-                    print("\nThe BOT chose to stop")
+                    print("\nThe BOT chose to stop", flush=True)
+                    print(f"TemporarilyScore: {Start.BOTScore}", flush=True)
+                    print(f"Throws: {Start.BOTThrows}", flush=True)
+                    print(f"TotalScore: {Start.BOTTotal}\n", flush=True)
 
-                    keepGoing = False
+                    Start.keepGoing = False
+                    
                     """Programmet väntar 3 sekunder."""
                     time.sleep(Start.waitTime)
-                    
+
                 """Kollar om botten har vunnit"""
                 if Start.BOTTotal >= 100:
                     print("The BOT won )=")
                     print(f"The BOT threw {Start.BOTThrows} times!!")
-                    keepGoing = False
+                    Start.keepGoing = False
                     Start.botWon = True
                     print("End")
-                    
+
         if not Start.botWon:
             print(f"Now its {Start.PlayerName} to play")
 

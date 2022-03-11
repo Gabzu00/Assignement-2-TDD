@@ -28,6 +28,6 @@ class checkHighScore():
 
             """Jämför gammalt rekord med det nya."""
             if int(fileScore) >= newSore:
+                print("New highscore!!!")
                 checkHighScore.toFile(player)
-            else:
-                print("End")
+            

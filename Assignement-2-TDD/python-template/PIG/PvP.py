@@ -7,8 +7,8 @@ import time
 
 
 class Start():
-    
     """Spelarnas poäng."""
+
     player1Throws = 0
     player1Score = 0
     player1Total = 0
@@ -38,7 +38,7 @@ class Start():
         HighScore.checkHighScore.read()
         print(f"\nNow its {Start.Player1Name} to start")
 
-        """Sätter namn och poäng till spelar objekt."""        
+        """Sätter namn och poäng till spelar objekt."""
         Start.player1 = Player1.Player_class(Start.Player1Name, 0)
         Start.player2 = Player2.Player_class(Start.Player2Name, 0)
 
@@ -166,8 +166,10 @@ class Start():
                 newName = input("Enter new name: ")
                 if whoChanges == "1":
                     Start.player1.changeName(newName)
+                    Start.Player1Name = newName
                 elif whoChanges == "2":
                     Start.player2.changeName(newName)
+                    Start.Player2Name = newName
                 Start.startPlayer2()
             else:
                 print("End")
@@ -209,7 +211,6 @@ class Start():
         """Om någon vinner kollar man om det är ett highscore eller inte."""
         call = HighScore.checkHighScore
         call.addHighScore(Start.player1Throws, Start.player1)
-        print("New highscore!!!")
         print("End")
 
     def Win2():
@@ -223,7 +224,6 @@ class Start():
         """Om någon vinner kollar man om det är ett highscore eller inte."""
         call = HighScore.checkHighScore
         call.addHighScore(Start.player2Throws, Start.player2)
-        print("New highscore!!!")
         print("End")
 
     def printValue(roll):
